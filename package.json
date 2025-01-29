@@ -1,0 +1,23 @@
+{
+  "name": "car-rentals",
+  "version": "1.0.0",
+  "scripts": {
+    "start:backend:dev": "npm run dev --workspace=backend",
+    "start:frontend:dev": "npm run dev --workspace=frontend",
+    "start:common:dev": "npm run dev --workspace=common",
+    "start:dev": "concurrently \"npm run start:common:dev\" \"npm run start:backend:dev\" \"npm run start:frontend:dev\""
+  },
+  "keywords": [],
+  "author": "",
+  "workspaces": [
+    "packages/*"
+  ],
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "typescript": "^5.7.3"
+  },
+  "dependencies": {
+    "zod": "^3.24.1"
+  }
+}
