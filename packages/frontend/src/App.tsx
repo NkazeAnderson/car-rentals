@@ -1,35 +1,56 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useRef, useState } from "react";
+import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState<File | undefined>(undefined);
+  const [name, setName] = useState<string>("");
+  const [description, setDescription] = useState<string>("");
+  const formRef = useRef<undefined | HTMLFormElement | null>();
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <form
+        ref={(ref) => {
+          formRef.current = ref;
+        }}
+        onSubmit={(e) => {
+          e.preventDefault();
+          const formData = new FormData();
+          formData.append("name", name);
+          formData.append("description", description);
+          count && formData.append("image", count);
+
+          const response = fetch("http://localhost:3000/category", {
+            method: "POST",
+            body: formData,
+          });
+        }}
+      >
+        <input
+          type="text"
+          name="name"
+          onChange={(e) => {
+            setName(e.currentTarget.value);
+          }}
+        />
+        <input
+          type="text"
+          name="description"
+          onChange={(e) => {
+            setDescription(e.currentTarget.value);
+          }}
+        />
+        <input
+          type="file"
+          name="image"
+          onChange={(e) => {
+            e.currentTarget.files?.length && setCount(e.currentTarget.files[0]);
+          }}
+        />
+        <input type="submit" value="Send" />
+      </form>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

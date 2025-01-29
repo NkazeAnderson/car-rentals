@@ -14,7 +14,8 @@ class Crud{
     }
    async create<T extends AppEntities>(entity:T, data:dataT<T>){
     const model = this.getModel(entity)
-    await model.create(data)
+   const {_id} = await model.create(data)
+   return _id
    }
    async get(entity:AppEntities, id:string){
     const model = this.getModel(entity)
