@@ -13,13 +13,16 @@
   "description": "",
   "dependencies": {
     "@zodyac/zod-mongoose": "^3.2.0",
+    "body-parser": "^1.20.3",
     "common": "^1.0.0",
     "express": "^4.21.2",
+    "express-form-data": "^2.0.23",
     "mongoose": "^8.9.5",
     "morgan": "^1.10.0"
   },
   "devDependencies": {
     "@types/express": "^5.0.0",
+    "@types/express-form-data": "^2.0.5",
     "@types/morgan": "^1.9.9",
     "@types/node": "^22.12.0",
     "nodemon": "^3.1.9",
