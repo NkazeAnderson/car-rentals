@@ -41,7 +41,8 @@ export type userT = z.infer<typeof userSchema>
 export const rideData= z.object({
     type:z.literal("Ride"),
     start:locationSchema,
-    end:locationSchema
+    end:locationSchema,
+    date:z.date(),
 })
 
 export const reservationData= z.object({

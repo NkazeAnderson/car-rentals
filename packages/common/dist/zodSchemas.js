@@ -35,7 +35,8 @@ const userSchema = zod_1.z.object({
 exports.rideData = zod_1.z.object({
     type: zod_1.z.literal("Ride"),
     start: exports.locationSchema,
-    end: exports.locationSchema
+    end: exports.locationSchema,
+    date: zod_1.z.date(),
 });
 exports.reservationData = zod_1.z.object({
     type: zod_1.z.literal("Reservation"),
