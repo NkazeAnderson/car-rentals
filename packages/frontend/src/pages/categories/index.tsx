@@ -1,11 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import CategoryCard from "../../components/ui/CategoryCard";
 import Container from "../../components/ui/Container";
 import ImageGallery from "../../components/ui/ImageGallery";
 import headerImage from "../../assets/vehicle-catgeory-banner.jpg";
 import { FaFacebook } from "react-icons/fa";
+import { AppContext } from "../../components/contextProviders/AppContextProvider";
 
 function CategoriesPage() {
+  const context = useContext(AppContext);
+  if (!context) {
+    return null;
+  }
+  const { categories } = context;
   return (
     <div>
       <div className="pb-10 h-[40vh]">
@@ -26,9 +32,9 @@ function CategoriesPage() {
         </ImageGallery>
       </div>
       <Container>
-        <CategoryCard lgHorizontal />
-        <CategoryCard lgHorizontal />
-        <CategoryCard lgHorizontal />
+        {categories.map((item) => (
+          <CategoryCard key={String(item._id)} category={item} lgHorizontal />
+        ))}
       </Container>
     </div>
   );

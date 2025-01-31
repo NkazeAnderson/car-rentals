@@ -23,10 +23,12 @@ function Input({
   lableText,
   options,
   registory,
+  error,
 }: {
   options: inputOptionsT;
   registory: UseFormRegisterReturn;
   lableText?: string;
+  error?: string;
 }) {
   function InputByType() {
     switch (options.__type) {
@@ -57,7 +59,9 @@ function Input({
     <div className="space-y-2">
       {lableText && (
         <label
-          className=" text-slate-700 font-semibold "
+          className={`  font-semibold ${
+            !error ? "text-slate-700" : "text-red-600"
+          }`}
           htmlFor={registory.name}
         >
           {lableText}{" "}
@@ -65,6 +69,7 @@ function Input({
         </label>
       )}
       <InputByType />
+      <p className="text-red-600 font-light">{error}</p>
     </div>
   );
 }

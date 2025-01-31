@@ -5,6 +5,7 @@ import Button from "../../components/ui/Button";
 import Input from "../../components/ui/Input";
 import { commonZodSchemas } from "common";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router";
 
 type rideOrderInfo<T extends commonZodSchemas.orderT["info"]> =
   T extends infer U ? (U extends { type: "Ride" } ? U : never) : never;
@@ -12,6 +13,7 @@ type rideOrderInfo<T extends commonZodSchemas.orderT["info"]> =
 function HeroSection() {
   const rideFormMethods =
     useForm<rideOrderInfo<commonZodSchemas.orderT["info"]>>();
+  const navigate = useNavigate();
   return (
     <div className="lg:h-[70dvh] h-[120dvh]  w-full bg-slate-600">
       <ImageGallery
@@ -31,7 +33,12 @@ function HeroSection() {
                   vehicles to make your travels comfortable and hassle-free. Let
                   your journey begin with Bon Voyages!
                 </p>
-                <Button text="Vehicle Categories" />
+                <Button
+                  text="Vehicle Categories"
+                  action={() => {
+                    navigate("/categories");
+                  }}
+                />
               </div>
               <div className="bg-white p-5 rounded-2xl flex-1">
                 <h4 className=" font-semibold pb-3">BOOK YOUR RIDE</h4>

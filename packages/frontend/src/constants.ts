@@ -12,3 +12,5 @@ export const navMenu: {path:string, text:string}[] = [
     {path:"/contact-us", text:"contact us"},
     {path:"/about-us", text:"about us"},
 ]
+
+export const backendUrl =  "http://localhost:3000"

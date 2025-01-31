@@ -1,10 +1,11 @@
 import { AppEntities } from "common";
 import { Router } from "express";
 import crud from "../crud/crud";
-import { appEntitiesSchemas } from "common/src/zodSchemas";
+import { commonZodSchemas } from "common";
 import { functionExecWithErrorResponder, routeHandler } from "./handlers";
 
 const routes = Router()
+const {appEntitiesSchemas} = commonZodSchemas
 
 function generateCrudRoutes(entity:AppEntities) {
     const basePath = entity.toLocaleLowerCase()
@@ -15,6 +16,16 @@ function generateCrudRoutes(entity:AppEntities) {
             const id = req.params.id
             const data = await functionExecWithErrorResponder(async()=>await crud.get(entity, id),  {code:400, message:"Can't find item with Id"})
             const parsedData = await functionExecWithErrorResponder(async()=>schema.passthrough().parse(data),  {code:500, message:""})
+            res.json(parsedData)
+        })
+        }
+    )
+
+    routes.get(`/${basePath}`, 
+       async (req, res, next)=>{
+        routeHandler(next, async()=>{
+            const data = await functionExecWithErrorResponder(async()=>await crud.list(entity),  {code:400, message:"Can't find items"})
+            const parsedData = await functionExecWithErrorResponder(async()=>schema.passthrough().array().parse(data),  {code:500, message:""})
             res.json(parsedData)
         })
         }

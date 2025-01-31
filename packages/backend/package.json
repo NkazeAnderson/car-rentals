@@ -1,7 +1,7 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "main": "./dist/index.js",
+  "main": "dist/index.js",
   "scripts": {
     "dev": "nodemon",
     "build": "tsc",
@@ -15,12 +15,14 @@
     "@zodyac/zod-mongoose": "^3.2.0",
     "body-parser": "^1.20.3",
     "common": "^1.0.0",
+    "cors": "^2.8.5",
     "express": "^4.21.2",
     "express-form-data": "^2.0.23",
     "mongoose": "^8.9.5",
     "morgan": "^1.10.0"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.17",
     "@types/express": "^5.0.0",
     "@types/express-form-data": "^2.0.5",
     "@types/morgan": "^1.9.9",

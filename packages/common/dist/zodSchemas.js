@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.appEntitiesSchemas = exports.reservationData = exports.rideData = exports.locationSchema = void 0;
+exports.appEntitiesSchemas = exports.orderSchema = exports.reservationData = exports.rideData = exports.userSchema = exports.carSchema = exports.categorySchema = exports.locationSchema = void 0;
 const zod_1 = require("zod");
 const zod_mongoose_1 = require("@zodyac/zod-mongoose");
 const constants_1 = require("./constants");
@@ -12,24 +12,25 @@ exports.locationSchema = zod_1.z.object({
     lng: baseNumber,
     lat: baseNumber
 });
-const categorySchema = zod_1.z.object({
+exports.categorySchema = zod_1.z.object({
     _id: (0, zod_mongoose_1.zId)(),
     name: baseString,
     description: baseString,
     image: baseString,
     secondaryImage: baseString
 });
-const carSchema = zod_1.z.object({
+exports.carSchema = zod_1.z.object({
     _id: (0, zod_mongoose_1.zId)(),
     categoryId: (0, zod_mongoose_1.zId)(constants_1.AppEntities.Category),
     description: baseString,
+    name: baseString,
     image: baseString,
     available: zod_1.z.boolean().optional(),
     reservationPricePerDay: baseNumber.positive(),
     ridePricePerKm: baseNumber,
-    location: exports.locationSchema
+    location: exports.locationSchema.optional()
 });
-const userSchema = zod_1.z.object({
+exports.userSchema = zod_1.z.object({
     _id: (0, zod_mongoose_1.zId)(),
     firstName: baseString,
     lastName: baseString,
@@ -47,7 +48,7 @@ exports.reservationData = zod_1.z.object({
     start: zod_1.z.date(),
     end: zod_1.z.date()
 });
-const orderSchema = zod_1.z.object({
+exports.orderSchema = zod_1.z.object({
     _id: (0, zod_mongoose_1.zId)(),
     carId: (0, zod_mongoose_1.zId)(constants_1.AppEntities.Car),
     price: baseNumber.positive(),
@@ -55,8 +56,8 @@ const orderSchema = zod_1.z.object({
     info: zod_1.z.union([exports.reservationData, exports.rideData])
 });
 exports.appEntitiesSchemas = {
-    [constants_1.AppEntities.Car]: carSchema,
-    [constants_1.AppEntities.Category]: categorySchema,
-    [constants_1.AppEntities.Order]: orderSchema,
-    [constants_1.AppEntities.User]: userSchema
+    [constants_1.AppEntities.Car]: exports.carSchema,
+    [constants_1.AppEntities.Category]: exports.categorySchema,
+    [constants_1.AppEntities.Order]: exports.orderSchema,
+    [constants_1.AppEntities.User]: exports.userSchema
 };

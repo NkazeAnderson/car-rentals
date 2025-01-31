@@ -1,7 +1,13 @@
 import Container from "../../components/ui/Container";
 import CategoryCard from "../../components/ui/CategoryCard";
+import { useContext } from "react";
+import { AppContext } from "../../components/contextProviders/AppContextProvider";
 
 function ServicesSection() {
+  const context = useContext(AppContext);
+  if (!context || context.categories.length < 3) {
+    return null;
+  }
   return (
     <div>
       <div className="bg-gray-900 py-3">
@@ -13,13 +19,13 @@ function ServicesSection() {
         <Container>
           <div className="flex flex-col lg:flex-row lg:space-x-3 space-x-0 lg:space-y-0 space-y-6">
             <div className="flex-1">
-              <CategoryCard />
+              <CategoryCard category={context.categories[0]} />
             </div>
-            <div className="flex-1 ">
-              <CategoryCard />
+            <div className="flex-1">
+              <CategoryCard category={context.categories[1]} />
             </div>
-            <div className="flex-1 ">
-              <CategoryCard />
+            <div className="flex-1">
+              <CategoryCard category={context.categories[3]} />
             </div>
           </div>
         </Container>

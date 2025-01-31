@@ -1,8 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import Container from "../../components/ui/Container";
 import ImageGallery from "../../components/ui/ImageGallery";
+import { AppContext } from "../../components/contextProviders/AppContextProvider";
 
 function CarCollectionSection() {
+  // const context = useContext(AppContext);
+  // if (!context || context.categories.length < 4) {
+  //   return null;
+  // }
+
   return (
     <div>
       <div className="bg-gray-900 py-3">

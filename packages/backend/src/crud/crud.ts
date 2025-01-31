@@ -22,6 +22,10 @@ class Crud{
     const model = this.getModel(entity)
     return await model.findById(id)
    }
+   async list(entity:AppEntities){
+    const model = this.getModel(entity)
+    return await model.find()
+   }
 
    async update<T extends AppEntities>(entity:T, id:string, data:Partial<dataT<T>>){
     const model = this.getModel(entity)

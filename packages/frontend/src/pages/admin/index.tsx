@@ -2,6 +2,7 @@ import React from "react";
 import Container from "../../components/ui/Container";
 import Underliner from "../../components/ui/Underliner";
 import CategoryForm from "./CategoryForm";
+import CarForm from "./CarForm";
 
 function AdminPage() {
   return (
@@ -13,6 +14,8 @@ function AdminPage() {
       <div>
         <h4 className="py-3">Add Category</h4>
         <CategoryForm />
+        <h4 className="py-3">Add Car</h4>
+        <CarForm />
       </div>
     </Container>
   );

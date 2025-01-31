@@ -3,6 +3,7 @@ import  morgan from "morgan"
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 import * as formData from "express-form-data"
+import cors from "cors"
 import routes from './routes';
 
 const app = express();
@@ -10,10 +11,13 @@ mongoose.connect("mongodb://localhost:27017/CarRentals").then(()=>{
   console.log("Successfully connected to database")
 }).catch(e=>console.error(e))
 const port = process.env.PORT || 3000;
+
 const logger = morgan("tiny")
 const jsonParser = bodyParser.json()
 const formDataParser = formData.parse({uploadDir:__dirname+"/../images"})
 const urlEncoded = bodyParser.urlencoded({ extended: true })
+
+app.use(cors({origin:"*"}))
 app.use(logger,jsonParser, urlEncoded)
 app.use(formDataParser);
 app.use("/images",express.static(__dirname + '/../images'))
