@@ -7,6 +7,7 @@ import { useGSAP } from "@gsap/react";
 import Home from "./pages/home/index.tsx";
 import CategoriesPage from "./pages/categories/index.tsx";
 import CategoryProductsPage from "./pages/categories/products/index.tsx";
+import AdminPage from "./pages/admin/index.tsx";
 gsap.registerPlugin(useGSAP);
 
 createRoot(document.getElementById("root")!).render(
@@ -15,6 +16,7 @@ createRoot(document.getElementById("root")!).render(
       <Routes>
         <Route path="/" element={<App />}>
           <Route index element={<Home />} />
+          <Route path="/admin" element={<AdminPage />} />
           <Route path="/categories" element={<CategoriesPage />} />
           <Route path="/categories/:id" element={<CategoryProductsPage />} />
         </Route>

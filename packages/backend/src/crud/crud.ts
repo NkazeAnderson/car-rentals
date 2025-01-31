@@ -14,6 +14,7 @@ class Crud{
     }
    async create<T extends AppEntities>(entity:T, data:dataT<T>){
     const model = this.getModel(entity)
+    data._id = crypto.randomUUID().split("-").join("").substring(0,24)
    const {_id} = await model.create(data)
    return _id
    }

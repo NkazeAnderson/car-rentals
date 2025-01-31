@@ -19,13 +19,14 @@ app.use(formDataParser);
 app.use("/images",express.static(__dirname + '/../images'))
 app.use((req, res, next)=>{
   if ("files" in req ) {
-    const {image:{path}} = req.files as { image: {path:string}}
-    let split = path.split("/")
-    if (split.length<=1) {
-      split = path.split("\\")
+    const files = req.files as Record<string, {path:string}>
+    for(let key in files) {
+      let split = files[key].path.split("/")
+      if (split.length<=1) {
+        split = files[key].path.split("\\")
+      }
+      req.body[key] = split[split.length - 1]
     }
-    req.body.image = split[split.length - 1]
-    
   }
   next()
 })

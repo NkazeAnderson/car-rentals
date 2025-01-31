@@ -13,6 +13,7 @@ export const locationSchema = z.object({
 export type locationT = z.infer<typeof locationSchema>
 
  const categorySchema = z.object({
+    _id:zId(),
     name:baseString,
     description:baseString,
     image:baseString,
@@ -21,6 +22,7 @@ export type locationT = z.infer<typeof locationSchema>
 export type categoryT = z.infer<typeof categorySchema>
 
  const carSchema = z.object({
+    _id:zId(),
     categoryId:zId(AppEntities.Category),
     description:baseString,
     image:baseString,
@@ -32,6 +34,7 @@ export type categoryT = z.infer<typeof categorySchema>
 export type carT = z.infer<typeof carSchema>
 
  const userSchema = z.object({
+    _id:zId(),
     firstName:baseString,
     lastName:baseString,
     email:baseString.email(),
@@ -53,6 +56,7 @@ export const reservationData= z.object({
 })
 
  const orderSchema = z.object({
+    _id:zId(),
     carId:zId(AppEntities.Car),
     price:baseNumber.positive(),
     userId:zId(AppEntities.User),

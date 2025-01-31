@@ -13,12 +13,14 @@ exports.locationSchema = zod_1.z.object({
     lat: baseNumber
 });
 const categorySchema = zod_1.z.object({
+    _id: (0, zod_mongoose_1.zId)(),
     name: baseString,
     description: baseString,
     image: baseString,
     secondaryImage: baseString
 });
 const carSchema = zod_1.z.object({
+    _id: (0, zod_mongoose_1.zId)(),
     categoryId: (0, zod_mongoose_1.zId)(constants_1.AppEntities.Category),
     description: baseString,
     image: baseString,
@@ -28,6 +30,7 @@ const carSchema = zod_1.z.object({
     location: exports.locationSchema
 });
 const userSchema = zod_1.z.object({
+    _id: (0, zod_mongoose_1.zId)(),
     firstName: baseString,
     lastName: baseString,
     email: baseString.email(),
@@ -45,6 +48,7 @@ exports.reservationData = zod_1.z.object({
     end: zod_1.z.date()
 });
 const orderSchema = zod_1.z.object({
+    _id: (0, zod_mongoose_1.zId)(),
     carId: (0, zod_mongoose_1.zId)(constants_1.AppEntities.Car),
     price: baseNumber.positive(),
     userId: (0, zod_mongoose_1.zId)(constants_1.AppEntities.User),

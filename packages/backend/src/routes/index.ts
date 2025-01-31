@@ -26,8 +26,8 @@ function generateCrudRoutes(entity:AppEntities) {
             console.log("body", req.body);
             //@ts-ignore
             console.log("file", req.files);
-            
-            const parsedData = await functionExecWithErrorResponder(async()=>schema.parse(req.body),  {code:400, message:""})
+            //@ts-ignore
+            const parsedData = await functionExecWithErrorResponder(async()=>schema.omit({"_id":true}).parse(req.body),  {code:400, message:""})
              const id = await functionExecWithErrorResponder(async()=>await crud.create(entity, parsedData),  {code:400, message:"This data is malformed"})
              res.json({id})
         })
