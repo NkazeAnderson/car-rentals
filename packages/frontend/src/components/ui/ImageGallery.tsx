@@ -8,7 +8,7 @@ function ImageGallery({
   images: string[];
 }) {
   return (
-    <div className="w-full h-full relative overflow-hidden">
+    <div className="w-full h-full relative">
       <img
         className="object-cover w-full h-full"
         key={images[0]}
@@ -16,7 +16,7 @@ function ImageGallery({
         alt=""
       />
 
-      <div className="absolute w-full h-full top-0 left-0">
+      <div className="absolute top-0 left-0 w-full h-full  z-20">
         {children || null}
       </div>
     </div>
