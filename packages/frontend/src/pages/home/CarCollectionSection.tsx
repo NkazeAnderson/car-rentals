@@ -13,23 +13,25 @@ function CarCollectionSection() {
         </Container>
       </div>
       <div className="py-8 px-4">
-        <div className="grid grid-cols-4 grid-rows-2">
-          <ImageGallery
-            images={[
-              "http://localhost:3000/images/Reliable-Affordable-and-Convenient-Car-Rentals-3-1.jpg",
-            ]}
-          >
-            <div className="border-2 w-full h-full">
-              <div className="flex flex-col h-full items-center justify-center my-auto border-white bg-black/50 ">
-                <h5 className="text-center capitalize text-white text-[20px] font-bold">
-                  sedan
-                </h5>
-                <p className="text-center capitalize text-slate-500 font-medium">
-                  from 2
-                </p>
+        <div className="grid grid-cols-2 lg:grid-cols-4 ">
+          <div className="h-[150px]">
+            <ImageGallery
+              images={[
+                "http://localhost:3000/images/Reliable-Affordable-and-Convenient-Car-Rentals-3-1.jpg",
+              ]}
+            >
+              <div className="border-2 w-full h-full">
+                <div className="flex flex-col h-full items-center justify-center my-auto border-white bg-black/50 ">
+                  <h4 className="text-center capitalize text-white text-[20px] font-bold">
+                    sedan
+                  </h4>
+                  <p className="text-center capitalize text-slate-500 font-medium">
+                    from 2
+                  </p>
+                </div>
               </div>
-            </div>
-          </ImageGallery>
+            </ImageGallery>
+          </div>
         </div>
       </div>
     </div>

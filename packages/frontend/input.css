@@ -4,7 +4,7 @@
 
 @layer base {
     *{
-        @apply font-inter text-[18px]
+        @apply font-inter text-[16px]
     }
     input, select{
         @apply w-full border p-2
@@ -23,5 +23,11 @@
     }
     h4{
         @apply text-[20px]
+    }
+}
+
+@layer components {
+    .colSmColLg {
+        @apply flex flex-col lg:flex-row space-y-4 lg:space-y-0 space-x-0 lg:space-x-4
     }
 }

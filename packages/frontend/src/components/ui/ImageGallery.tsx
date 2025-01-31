@@ -5,7 +5,7 @@ function ImageGallery({
   images,
 }: {
   children?: React.ReactNode;
-  images: string[];
+  images: any[];
 }) {
   return (
     <div className="w-full h-full relative">

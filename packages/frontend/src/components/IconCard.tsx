@@ -17,19 +17,32 @@ function IconCard({
     <div
       className={`flex flex-col space-y-2 ${
         justify === "left"
-          ? "items-start"
+          ? "lg:items-start"
           : justify === "right"
-          ? "items-end"
-          : "items-center"
-      } ${white ? "text-white" : "text-black"}`}
+          ? "lg:items-end"
+          : "lg:items-center"
+      } ${white ? "text-white" : "text-black"} items-center`}
     >
       <img className="size-[50px]" src={image} alt="" />
-      <h4 className="font-semibold text-[18px]" style={{ textAlign: justify }}>
+      <h4
+        className={`font-semibold text-[18px] ${
+          justify === "left"
+            ? "lg:text-left"
+            : justify === "right"
+            ? "lg:text-right"
+            : "lg:text-center"
+        } text-center`}
+      >
         {title}
       </h4>
       <p
-        className={`${white && "text-slate-300"}`}
-        style={{ textAlign: justify }}
+        className={`${white && "text-slate-300"} ${
+          justify === "left"
+            ? "lg:text-left"
+            : justify === "right"
+            ? "lg:text-right"
+            : "lg:text-center"
+        } text-center`}
       >
         {body}
       </p>

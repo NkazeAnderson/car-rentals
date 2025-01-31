@@ -13,7 +13,7 @@ function HeroSection() {
   const rideFormMethods =
     useForm<rideOrderInfo<commonZodSchemas.orderT["info"]>>();
   return (
-    <div className="lg:h-[70dvh] h-[90dvh]  w-full bg-slate-600">
+    <div className="lg:h-[70dvh] h-[120dvh]  w-full bg-slate-600">
       <ImageGallery
         images={[
           "http://localhost:3000/images/Reliable-Affordable-and-Convenient-Car-Rentals-3-1.jpg",
@@ -21,7 +21,7 @@ function HeroSection() {
       >
         <div className="w-full h-full bg-black/50">
           <Container fullHeight>
-            <div className="flex items-center h-full flex-col lg:flex-row lg:space-x-3 space-x-0 lg:space-y-0 space-y-6">
+            <div className="flex items-center h-full flex-col py-7 lg:flex-row lg:space-x-3 space-x-0 lg:space-y-0 space-y-6">
               <div className="flex-1 text-white space-y-2">
                 <h1 className="text-[30px] lg:text-[50px]">
                   Reliable & Affordable Car Rentals!{" "}

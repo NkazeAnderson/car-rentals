@@ -26,8 +26,8 @@ function FurtherReadingsSection() {
         <Underliner />
         <div className="py-10"></div>
         <Container>
-          <div className="flex">
-            <div className="flex-1 space-y-3 items-stretch">
+          <div className="colSmColLg items-stretch">
+            <div className="flex-1 space-y-3 ">
               <IconCard
                 image={commitmentIcon1}
                 title="High-end quality vehicles"
@@ -60,7 +60,7 @@ function FurtherReadingsSection() {
         </Container>
       </div>
       {/* About us */}
-      <div className="flex mt-8">
+      <div className="colSmColLg mt-8">
         <div className="flex-1">
           <img
             className="w-full h-full rounded-lg object-cover border border-black shadow-lg"
@@ -68,10 +68,10 @@ function FurtherReadingsSection() {
             alt=""
           />
         </div>
-        <div className="flex-1 p-10">
-          <div className="p-10 space-y-5 bg-white shadow-xl relative lg:right-[10%]">
+        <div className="flex-1 p-5 lg:p-10">
+          <div className="p-2 lg:p-10 lg:space-y-5 bg-white shadow-xl relative lg:right-[10%] text-justify">
             <h2>About Us</h2>
-            <p>
+            <p className="pb-4">
               We at Bon Voyages Car Rental are committed to offering you the
               best, most reliable, and most convenient vehicle rentals that
               align with all your wants and needs. Quality is our top priority.
@@ -93,7 +93,7 @@ function FurtherReadingsSection() {
           <h4 className=" uppercase text-white py-4">
             The numbers you need to know
           </h4>
-          <div className="flex items-center justify-around">
+          <div className="grid grid-cols-2 lg:grid-cols-4 ">
             <NumberCount
               value={5}
               valueSize={48}
@@ -118,11 +118,11 @@ function FurtherReadingsSection() {
         </Container>
       </div>
       {/* Banner */}
-      <div className="w-full h-[40vh]">
+      <div className="w-full lg:h-[40vh]  h-[100vh]">
         <ImageGallery images={["/banner.jpg"]}>
           <div className="w-full h-full bg-black/70">
             <Container fullHeight>
-              <div className="flex justify-between h-full items-center space-x-3">
+              <div className="colSmColLg justify-between h-full items-center py-5">
                 <IconCard
                   image={bannerIcon1}
                   title="Flexible Rental Terms"
@@ -150,7 +150,7 @@ function FurtherReadingsSection() {
         </ImageGallery>
       </div>
       {/* Simple Steps */}
-      <div>
+      <div className="pb-6">
         <div className="py-12">
           <h2 className="text-center">
             Follow these 4 Simple Steps for a Thriving Travel Experience!
@@ -182,7 +182,7 @@ function FurtherReadingsSection() {
 
 function SimpleStep({ title, text }: { title: string; text: string }) {
   return (
-    <div className="flex space-x-6">
+    <div className="colSmColLg">
       <div className=" flex-1">
         <div className="mb-5">
           <h3>{title}</h3>

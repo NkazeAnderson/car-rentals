@@ -1,5 +1,5 @@
 import Container from "../../components/ui/Container";
-import ProductCard from "../../components/ui/ProductCard";
+import CategoryCard from "../../components/ui/CategoryCard";
 
 function ServicesSection() {
   return (
@@ -13,13 +13,13 @@ function ServicesSection() {
         <Container>
           <div className="flex flex-col lg:flex-row lg:space-x-3 space-x-0 lg:space-y-0 space-y-6">
             <div className="flex-1">
-              <ProductCard />
+              <CategoryCard />
             </div>
             <div className="flex-1 ">
-              <ProductCard />
+              <CategoryCard />
             </div>
             <div className="flex-1 ">
-              <ProductCard />
+              <CategoryCard />
             </div>
           </div>
         </Container>

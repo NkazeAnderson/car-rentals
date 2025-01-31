@@ -15,7 +15,8 @@ exports.locationSchema = zod_1.z.object({
 const categorySchema = zod_1.z.object({
     name: baseString,
     description: baseString,
-    image: baseString
+    image: baseString,
+    secondaryImage: baseString
 });
 const carSchema = zod_1.z.object({
     categoryId: (0, zod_mongoose_1.zId)(constants_1.AppEntities.Category),

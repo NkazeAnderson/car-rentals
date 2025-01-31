@@ -15,7 +15,8 @@ export type locationT = z.infer<typeof locationSchema>
  const categorySchema = z.object({
     name:baseString,
     description:baseString,
-    image:baseString
+    image:baseString,
+    secondaryImage:baseString
 })
 export type categoryT = z.infer<typeof categorySchema>
 

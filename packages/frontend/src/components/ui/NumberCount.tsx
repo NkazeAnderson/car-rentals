@@ -14,7 +14,9 @@ function NumberCount({
       <p className="font-bold" style={{ fontSize: valueSize }}>
         {value} +
       </p>
-      <p className="text-center">{description}</p>
+      <p className="text-center text-[14px] md:text-[16px] text-slate-300">
+        {description}
+      </p>
     </div>
   );
 }
