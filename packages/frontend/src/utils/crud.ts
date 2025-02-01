@@ -3,9 +3,25 @@ import { backendUrl } from "../constants";
 import { AppEntities } from "common";
 import { appEntitiesSchemas } from "common/src/zodSchemas";
 
+
+
 class Crud {
     constructor(){}
 
+    ignoreList(entity:AppEntities):Record<string, boolean>{
+      switch (entity) {
+        case "Category":
+          return {_id:true}
+          break;
+        case "Car":
+          return {_id:true, categoryId:true}
+          break;
+      
+        default:
+          return {}
+          break;
+      }
+    }
   async get(id:string, entity:AppEntities){
      const res = await axios.get(`${backendUrl}/${entity}/${id}`)
      //@ts-ignore
@@ -14,8 +30,9 @@ class Crud {
   async list(entity:AppEntities){
      const res = await axios.get(`${backendUrl}/${entity}`)
      //@ts-ignore
-     return res.data
+     return appEntitiesSchemas[entity].passthrough().omit(this.ignoreList(entity)).array().parse(res.data) 
     }
+
   async create(data:unknown, entity:AppEntities){
      const res = await axios.post(`${backendUrl}/${entity}`, data)
      return  res.data as {id:string}

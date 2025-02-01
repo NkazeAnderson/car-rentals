@@ -2,6 +2,7 @@ import { AppEntities } from "common";
 import React, { createContext, useEffect, useState } from "react";
 import crud from "../../utils/crud";
 import { carT, categoryT } from "common/src/zodSchemas";
+import { backendUrl } from "../../constants";
 
 type appContextT = {
   categories: categoryT[];
@@ -18,13 +19,24 @@ function AppContextProvider({ children }: { children: React.ReactNode }) {
     //@ts-ignore
     crud.list("Category").then((res) => {
       console.log(res);
-      //@ts-ignore
+      if (Array.isArray(res)) {
+        res = res.map((item) => {
+          item.image = `${backendUrl}/images/${item.image}`;
+          item.secondaryImage = `${backendUrl}/images/${item.secondaryImage}`;
+          return item;
+        });
+      }
       setCategories(res);
     });
     //@ts-ignore
     crud.list("Car").then((res) => {
       console.log(res);
-      //@ts-ignore
+      if (Array.isArray(res)) {
+        res = res.map((item) => {
+          item.image = `${backendUrl}/images/${item.image}`;
+          return item;
+        });
+      }
       setCars(res);
     });
   }, []);

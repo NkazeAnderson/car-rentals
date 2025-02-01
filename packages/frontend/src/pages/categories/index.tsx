@@ -17,7 +17,7 @@ function CategoriesPage() {
       <div className="pb-10 h-[40vh]">
         <ImageGallery images={[headerImage]}>
           <div className="bg-black/70 w-full h-full text-white flex flex-col justify-center items-center px-12">
-            <h2>
+            <h2 className="text-[22px] lg:text-[35px]">
               From Economy To Luxury, We Have A Wide Range Of Vehicles For You.
               Explore Now.
             </h2>

@@ -5,11 +5,14 @@ import Logo from "./ui/Logo";
 import Container from "./ui/Container";
 import NavBarMenu from "./NavBarMenu";
 import { FaCircleXmark } from "react-icons/fa6";
+import { useLocation } from "react-router";
 
 function NavBar() {
   const [mobileMenuOpen, setmobileMenuOpen] = useState(
     window.screen.width > 500 ? true : false
   );
+  const path = useLocation();
+
   const closeMenu = () => {
     setmobileMenuOpen(!mobileMenuOpen);
   };
@@ -19,12 +22,15 @@ function NavBar() {
       setmobileMenuOpen(window.screen.width > 500 ? true : false);
     });
   }, []);
+  useEffect(() => {
+    mobileMenuOpen && closeMenu();
+  }, [path]);
 
   return (
     <>
       <div className="bg-gray-900 py-3">
         <Container>
-          <div className="flex item-center justify-between ">
+          <div className="flex item-center justify-between text-[12px] font-light">
             <div className=" text-white">
               <p>
                 Call now: <b>{contactInfo.phone}</b>

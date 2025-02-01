@@ -644,6 +644,10 @@ form > :not([hidden]) ~ :not([hidden]) {
   z-index: 20;
 }
 
+.z-50 {
+  z-index: 50;
+}
+
 .my-auto {
   margin-top: auto;
   margin-bottom: auto;
@@ -665,12 +669,20 @@ form > :not([hidden]) ~ :not([hidden]) {
   margin-top: 2rem;
 }
 
+.block {
+  display: block;
+}
+
 .flex {
   display: flex;
 }
 
 .grid {
   display: grid;
+}
+
+.hidden {
+  display: none;
 }
 
 .size-\[100px\] {
@@ -1077,6 +1089,10 @@ form > :not([hidden]) ~ :not([hidden]) {
   font-size: 20px;
 }
 
+.text-\[22px\] {
+  font-size: 22px;
+}
+
 .text-\[24px\] {
   font-size: 24px;
 }
@@ -1209,6 +1225,10 @@ form > :not([hidden]) ~ :not([hidden]) {
     height: 70dvh;
   }
 
+  .lg\:w-\[30\%\] {
+    width: 30%;
+  }
+
   .lg\:flex-\[2\] {
     flex: 2;
   }
@@ -1243,6 +1263,12 @@ form > :not([hidden]) ~ :not([hidden]) {
     --tw-space-x-reverse: 0;
     margin-right: calc(1rem * var(--tw-space-x-reverse));
     margin-left: calc(1rem * calc(1 - var(--tw-space-x-reverse)));
+  }
+
+  .lg\:space-x-5 > :not([hidden]) ~ :not([hidden]) {
+    --tw-space-x-reverse: 0;
+    margin-right: calc(1.25rem * var(--tw-space-x-reverse));
+    margin-left: calc(1.25rem * calc(1 - var(--tw-space-x-reverse)));
   }
 
   .lg\:space-y-0 > :not([hidden]) ~ :not([hidden]) {
@@ -1280,6 +1306,10 @@ form > :not([hidden]) ~ :not([hidden]) {
 
   .lg\:text-right {
     text-align: right;
+  }
+
+  .lg\:text-\[35px\] {
+    font-size: 35px;
   }
 
   .lg\:text-\[50px\] {
