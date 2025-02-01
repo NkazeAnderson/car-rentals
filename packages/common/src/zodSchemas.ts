@@ -30,7 +30,7 @@ export const carSchema = z.object({
     available:z.boolean().optional(),
     reservationPricePerDay:baseNumber.positive(),
     ridePricePerKm:baseNumber,
-    location:locationSchema.optional()
+  //  location:locationSchema.optional()
 })
 export type carT = z.infer<typeof carSchema>
 

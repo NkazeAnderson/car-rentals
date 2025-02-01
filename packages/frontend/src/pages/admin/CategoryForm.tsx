@@ -1,16 +1,18 @@
-import React, { useRef } from "react";
+import React, { useContext, useRef } from "react";
 import { useForm } from "react-hook-form";
 import Input from "../../components/ui/Input";
 import { commonZodSchemas } from "common";
 import Button from "../../components/ui/Button";
 import axios from "axios";
 import { backendUrl } from "../../constants";
+import { AppContext } from "../../components/contextProviders/AppContextProvider";
 
 function CategoryForm({ data }: { data?: commonZodSchemas.categoryT }) {
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm<commonZodSchemas.categoryT>({
     defaultValues: { _id: data?._id || "" },
     // resolver: zodResolver(
@@ -18,14 +20,18 @@ function CategoryForm({ data }: { data?: commonZodSchemas.categoryT }) {
     // ),
   });
   const ref = useRef<HTMLFormElement | null>(null);
+  const context = useContext(AppContext);
+
   const submit = async (data: commonZodSchemas.categoryT) => {
     try {
-      if (!ref.current) {
+      if (!ref.current || !context) {
         throw new Error("");
       }
       const formData = new FormData(ref.current);
       const res = await axios.post(`${backendUrl}/category`, formData);
-      console.log(res.data);
+      //@ts-ignore
+      context.updateFunc("Category");
+      reset();
     } catch (error) {
       alert("An error occurred");
     }

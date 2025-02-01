@@ -28,7 +28,7 @@ exports.carSchema = zod_1.z.object({
     available: zod_1.z.boolean().optional(),
     reservationPricePerDay: baseNumber.positive(),
     ridePricePerKm: baseNumber,
-    location: exports.locationSchema.optional()
+    //  location:locationSchema.optional()
 });
 exports.userSchema = zod_1.z.object({
     _id: (0, zod_mongoose_1.zId)(),

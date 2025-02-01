@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { contactInfo } from "../constants";
 import { FaBars, FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa";
 import Logo from "./ui/Logo";
@@ -7,10 +7,19 @@ import NavBarMenu from "./NavBarMenu";
 import { FaCircleXmark } from "react-icons/fa6";
 
 function NavBar() {
-  const [mobileMenuOpen, setmobileMenuOpen] = useState(false);
+  const [mobileMenuOpen, setmobileMenuOpen] = useState(
+    window.screen.width > 500 ? true : false
+  );
   const closeMenu = () => {
     setmobileMenuOpen(!mobileMenuOpen);
   };
+
+  useEffect(() => {
+    window.addEventListener("resize", (e) => {
+      setmobileMenuOpen(window.screen.width > 500 ? true : false);
+    });
+  }, []);
+
   return (
     <>
       <div className="bg-gray-900 py-3">

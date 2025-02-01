@@ -14,7 +14,7 @@ class Crud {
   async list(entity:AppEntities){
      const res = await axios.get(`${backendUrl}/${entity}`)
      //@ts-ignore
-     return appEntitiesSchemas[entity].passthrough().omit({"_id":true}).array().parse(res.data) 
+     return res.data
     }
   async create(data:unknown, entity:AppEntities){
      const res = await axios.post(`${backendUrl}/${entity}`, data)

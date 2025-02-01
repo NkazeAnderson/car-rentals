@@ -1,25 +1,16 @@
 import React from "react";
 import Button from "./Button";
 import ImageGallery from "./ImageGallery";
+import { carT } from "common/src/zodSchemas";
 
-function ProductCard({
-  name,
-  price,
-  id,
-  image,
-}: {
-  name: string;
-  price: number;
-  id: string;
-  image: string;
-}) {
+function ProductCard({ product }: { product: carT }) {
   return (
     <div className="text-center">
       <div className="h-[150px] ">
-        <ImageGallery images={[image]} />
+        <ImageGallery images={[product.image]} />
       </div>
-      <h4>{name}</h4>
-      <p className="text-red-800">{`$${price} /night`}</p>
+      <h4>{product.name}</h4>
+      <p className="text-red-800">{`$${product.reservationPricePerDay} /day`}</p>
       <div className="py-4">
         <Button text="Select Dates" />
       </div>

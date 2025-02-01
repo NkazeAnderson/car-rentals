@@ -4,9 +4,9 @@ import { model } from "mongoose";
 
 const {appEntitiesSchemas} = commonZodSchemas
 const categoryMongooseSchema = zodSchema(appEntitiesSchemas[AppEntities.Category])
-const carMongooseSchema = zodSchema(appEntitiesSchemas[AppEntities.Category])
-const userMongooseSchema = zodSchema(appEntitiesSchemas[AppEntities.Category])
-const orderMongooseSchema = zodSchema(appEntitiesSchemas[AppEntities.Category])
+const carMongooseSchema = zodSchema(appEntitiesSchemas[AppEntities.Car])
+const userMongooseSchema = zodSchema(appEntitiesSchemas[AppEntities.User])
+const orderMongooseSchema = zodSchema(appEntitiesSchemas[AppEntities.User])
 const categoryModel = model(AppEntities.Category, categoryMongooseSchema);
 const carModel = model(AppEntities.Car, carMongooseSchema);
  const userModel = model(AppEntities.User, userMongooseSchema);

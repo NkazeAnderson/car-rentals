@@ -12,10 +12,11 @@ function CarForm({ data }: { data?: commonZodSchemas.carT }) {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm<commonZodSchemas.carT>({
     defaultValues: {
       _id: data?._id || "",
-      location: { formatedName: "jjshhs", lat: 7777, lng: 999 },
+      //   location: { formatedName: "jjshhs", lat: 7777, lng: 999 },
     },
     // resolver: zodResolver(
     //   commonZodSchemas.appEntitiesSchemas.Category.omit({ _id: true })
@@ -32,15 +33,15 @@ function CarForm({ data }: { data?: commonZodSchemas.carT }) {
       const category = context.categories.find(
         (item) => item.name === data.categoryId
       );
-      console.log({ data });
-      console.log({ category });
 
       if (!category) {
         throw new Error("");
       }
       formData.set("categoryId", category._id as string);
       const res = await axios.post(`${backendUrl}/car`, formData);
-      alert("Product Added");
+      //@ts-ignore
+      context.updateFunc("Car");
+      reset();
     } catch (error) {
       alert("An error occurred");
     }
