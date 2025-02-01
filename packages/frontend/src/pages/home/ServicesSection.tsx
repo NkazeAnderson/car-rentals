@@ -25,7 +25,7 @@ function ServicesSection() {
               <CategoryCard category={context.categories[1]} />
             </div>
             <div className="flex-1">
-              <CategoryCard category={context.categories[3]} />
+              <CategoryCard category={context.categories[2]} />
             </div>
           </div>
         </Container>
