@@ -4,6 +4,7 @@ import { AppEntities } from "./constants";
 extendZod(z);
 const baseString = z.coerce.string().trim().toLowerCase().nonempty()
 const baseNumber = z.coerce.number()
+export const countryList:[string, ...string[]] = ["United States", "United Kingdom", "United Arab Emirates"]
 
 export const locationSchema = z.object({
     formatedName:baseString,
@@ -39,29 +40,38 @@ export const userSchema = z.object({
     firstName:baseString,
     lastName:baseString,
     email:baseString.email(),
-    phone:baseString.min(8)
+    phone:baseString.min(8), 
+    companyName:baseString.optional(),
+    country:z.enum(countryList).default("United States"),
+    street:baseString.min(5),
+    city:baseString.min(2),
+    state:baseString.min(2),
+    zipCode:baseString.min(2)
 })
 export type userT = z.infer<typeof userSchema>
 
 export const rideData= z.object({
-    type:z.literal("Ride"),
+    type:z.enum(["Ride"]).default("Ride"),
     start:locationSchema,
     end:locationSchema,
     date:z.date(),
 })
+export type rideDataT = z.infer<typeof rideData>
 
 export const reservationData= z.object({
-    type:z.literal("Reservation"),
-    start:z.date(),
-    end:z.date()
+    type:z.enum(["Reservation"]).default("Reservation"),
+    start:z.string(),
+    end:z.string(),
 })
+export type reservationDataT = z.infer<typeof reservationData>
 
 export const orderSchema = z.object({
     _id:zId(),
     carId:zId(AppEntities.Car),
-    price:baseNumber.positive(),
+    quantity:baseNumber.positive(),
     userId:zId(AppEntities.User),
-    info:z.union([reservationData, rideData])
+    info:z.union([reservationData, rideData]),
+    notes:baseString.optional()
 })
 export type orderT = z.infer<typeof orderSchema>
 

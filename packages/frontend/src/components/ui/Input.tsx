@@ -24,18 +24,20 @@ function Input({
   options,
   registory,
   error,
+  placeholder,
 }: {
   options: inputOptionsT;
   registory: UseFormRegisterReturn;
   lableText?: string;
   error?: string;
+  placeholder?: string;
 }) {
   function InputByType() {
     switch (options.__type) {
       case "text":
-        return <input type="text" {...registory} />;
+        return <input type="text" {...registory} placeholder={placeholder} />;
       case "textArea":
-        return <textarea {...registory} />;
+        return <textarea {...registory} placeholder={placeholder} />;
       case "date":
         return <input type="date" {...registory} />;
       case "file":

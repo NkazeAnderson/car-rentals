@@ -3,8 +3,6 @@ import { backendUrl } from "../constants";
 import { AppEntities } from "common";
 import { appEntitiesSchemas } from "common/src/zodSchemas";
 
-
-
 class Crud {
     constructor(){}
 

@@ -34,6 +34,7 @@ function generateCrudRoutes(entity:AppEntities) {
     routes.post(`/${basePath}`, 
        async (req, res, next)=>{
         routeHandler(next, async ()=>{
+          
             console.log("body", req.body);
             //@ts-ignore
             console.log("file", req.files);
