@@ -18,9 +18,9 @@ function ServicesSection() {
       </div>
       <div className="py-8">
         <Container>
-          <div className="flex flex-col lg:flex-row lg:space-x-3 space-x-0 lg:space-y-0 space-y-6">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
             {trimArray(context.categories, 3).map((item) => (
-              <div className="flex-1">
+              <div className="">
                 <CategoryCard category={item} />
               </div>
             ))}

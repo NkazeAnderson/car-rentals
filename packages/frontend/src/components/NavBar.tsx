@@ -20,10 +20,11 @@ function NavBar() {
   useEffect(() => {
     window.addEventListener("resize", (e) => {
       setmobileMenuOpen(window.screen.width > 500 ? true : false);
+      console.log(window.screen.width);
     });
   }, []);
   useEffect(() => {
-    mobileMenuOpen && closeMenu();
+    mobileMenuOpen && window.screen.width < 500 && closeMenu();
   }, [path]);
 
   return (

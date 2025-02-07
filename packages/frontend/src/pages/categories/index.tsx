@@ -5,6 +5,7 @@ import ImageGallery from "../../components/ui/ImageGallery";
 import headerImage from "../../assets/vehicle-catgeory-banner.jpg";
 import { FaFacebook } from "react-icons/fa";
 import { AppContext } from "../../components/contextProviders/AppContextProvider";
+import PageHeader from "../../components/PageHeader";
 
 function CategoriesPage() {
   const context = useContext(AppContext);
@@ -14,23 +15,11 @@ function CategoriesPage() {
   const { categories } = context;
   return (
     <div>
-      <div className="pb-10 h-[40vh]">
-        <ImageGallery images={[headerImage]}>
-          <div className="bg-black/70 w-full h-full text-white flex flex-col justify-center items-center px-12">
-            <h2 className="text-[22px] lg:text-[35px]">
-              From Economy To Luxury, We Have A Wide Range Of Vehicles For You.
-              Explore Now.
-            </h2>
-            <div className="flex space-x-3 text-[50px]">
-              <FaFacebook />
-              <FaFacebook />
-              <FaFacebook />
-              <FaFacebook />
-              <FaFacebook />
-            </div>
-          </div>
-        </ImageGallery>
-      </div>
+      <PageHeader
+        backgroundImg={headerImage}
+        text="From Economy To Luxury, We Have A Wide Range Of Vehicles For You.
+            Explore Now."
+      />
       <Container>
         {categories.map((item) => (
           <CategoryCard key={String(item._id)} category={item} lgHorizontal />

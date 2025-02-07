@@ -7,7 +7,7 @@ import cors from "cors"
 import routes from './routes';
 
 const app = express();
-mongoose.connect("mongodb+srv://nkazeanderso:waletest@cluster0.unrodzu.mongodb.net/?retryWrites=true&w=majority&appName=CarRentals").then(()=>{
+mongoose.connect("mongodb://localhost:27017/CarRentals").then(()=>{
   console.log("Successfully connected to database")
 }).catch(e=>console.error(e))
 const port = process.env.PORT || 3000;
