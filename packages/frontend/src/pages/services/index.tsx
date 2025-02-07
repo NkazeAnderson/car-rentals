@@ -66,7 +66,7 @@ function ServicesPage() {
             </div>
             <div className="flex-1 text-center">
               <h3 className="py-3 hover:text-orange-600">{service.title}</h3>
-              <p className="px-2">{service.description}</p>
+              <p className="px-4">{service.description}</p>
             </div>
           </div>
         ))}

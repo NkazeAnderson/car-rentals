@@ -12,6 +12,7 @@ import ProductPage from "./pages/product/index.tsx";
 import CartPage from "./pages/cart/index.tsx";
 import CheckoutPage from "./pages/checkout/index.tsx";
 import ServicesPage from "./pages/services/index.tsx";
+import ContactUsPage from "./pages/contact-us/index.tsx";
 gsap.registerPlugin(useGSAP);
 
 createRoot(document.getElementById("root")!).render(
@@ -27,6 +28,7 @@ createRoot(document.getElementById("root")!).render(
           <Route path="/cart" element={<CartPage />} />
           <Route path="/checkout" element={<CheckoutPage />} />
           <Route path="/services" element={<ServicesPage />} />
+          <Route path="/contact-us" element={<ContactUsPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
