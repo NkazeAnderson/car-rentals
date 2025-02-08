@@ -17,17 +17,19 @@ function CategoryCard({
     <div
       className={`flex flex-col w-full mb-2 ${
         lgHorizontal &&
-        "lg:flex-row lg:space-x-5 p-2 lg:p-4 lg:items-center bg-gray-300 rounded-3xl lg:mb-4"
+        "lg:flex-row lg:space-x-11 p-2 lg:p-4 lg:items-center bg-gray-300 rounded-3xl lg:mb-4"
       } `}
     >
       <div className={` h-[250px] w-full ${lgHorizontal && "flex-[1]"}`}>
         <ImageGallery images={[`${category.image}`]} />
       </div>
       <div className="space-y-4 mt-3 flex-[2]">
-        <h4 className=" font-semibold text-[20px]">{category.name}</h4>
-        <p>{category.description}</p>
+        <h4 className=" font-semibold text-[20px] capitalize">
+          {category.name}
+        </h4>
+        <p className=" first-letter:capitalize">{category.description}</p>
         <Button
-          text="Explore More"
+          text="Book Now"
           action={() => {
             navigate(`/categories/${category._id}`);
           }}

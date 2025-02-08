@@ -2,24 +2,11 @@ import axios from "axios";
 import { backendUrl } from "../constants";
 import { AppEntities } from "common";
 import { appEntitiesSchemas } from "common/src/zodSchemas";
+import { getZodIgnoreList } from ".";
 
 class Crud {
     constructor(){}
 
-    ignoreList(entity:AppEntities):Record<string, boolean>{
-      switch (entity) {
-        case "Category":
-          return {_id:true}
-          break;
-        case "Car":
-          return {_id:true, categoryId:true}
-          break;
-      
-        default:
-          return {}
-          break;
-      }
-    }
   async get(id:string, entity:AppEntities){
      const res = await axios.get(`${backendUrl}/${entity}/${id}`)
      //@ts-ignore
@@ -28,7 +15,7 @@ class Crud {
   async list(entity:AppEntities){
      const res = await axios.get(`${backendUrl}/${entity}`)
      //@ts-ignore
-     return appEntitiesSchemas[entity].passthrough().omit(this.ignoreList(entity)).array().parse(res.data) 
+     return appEntitiesSchemas[entity].passthrough().omit(getZodIgnoreList(entity)).array().parse(res.data) 
     }
 
   async create(data:unknown, entity:AppEntities){
@@ -37,7 +24,7 @@ class Crud {
     }
   async update(id:string, entity:AppEntities, data:unknown){
     //@ts-ignore
-    await axios.put(`${backendUrl}/${entity}/${id}`, appEntitiesSchemas[entity].omit({"_id":true}).partial().parse(data))
+    await axios.put(`${backendUrl}/${entity}/${id}`, appEntitiesSchemas[entity].omit(getZodIgnoreList(entity)).partial().parse(data))
      
     }
   async delete(id:string, entity:AppEntities){

@@ -1,11 +1,12 @@
 import React, { useContext, useRef } from "react";
 import { useForm } from "react-hook-form";
 import Input from "../../components/ui/Input";
-import { commonZodSchemas } from "common";
+import { commonZodSchemas } from "common/src";
 import Button from "../../components/ui/Button";
 import axios from "axios";
 import { backendUrl } from "../../constants";
 import { AppContext } from "../../components/contextProviders/AppContextProvider";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 function CategoryForm({ data }: { data?: commonZodSchemas.categoryT }) {
   const {
@@ -13,11 +14,12 @@ function CategoryForm({ data }: { data?: commonZodSchemas.categoryT }) {
     handleSubmit,
     formState: { errors },
     reset,
+    setError,
   } = useForm<commonZodSchemas.categoryT>({
     defaultValues: { _id: data?._id || "" },
-    // resolver: zodResolver(
-    //   commonZodSchemas.appEntitiesSchemas.Category.omit({ _id: true })
-    // ),
+    resolver: zodResolver(
+      commonZodSchemas.appEntitiesSchemas.Category.omit({ _id: true })
+    ),
   });
   const ref = useRef<HTMLFormElement | null>(null);
   const context = useContext(AppContext);
@@ -28,12 +30,36 @@ function CategoryForm({ data }: { data?: commonZodSchemas.categoryT }) {
         throw new Error("");
       }
       const formData = new FormData(ref.current);
-      const res = await axios.post(`${backendUrl}/category`, formData);
+      const image = formData.get("image") as File;
+      const secondaryImage = formData.get("secondaryImage") as File;
+      if (!image.size) {
+        setError("image", { message: "Required" });
+        throw new Error("image");
+      }
+      if (!secondaryImage.size) {
+        setError("secondaryImage", { message: "Required" });
+        throw new Error("secondaryImage");
+      }
+
+      //const res = await axios.post(`${backendUrl}/category`, formData);
       //@ts-ignore
       context.updateFunc("Category");
       reset();
     } catch (error) {
-      alert("An error occurred");
+      if (error instanceof Error) {
+        switch (error.message) {
+          case "image":
+            alert("Image Required");
+            break;
+          case "secondaryImage":
+            alert("Secondary Image Required");
+            break;
+
+          default:
+            alert("An error occurred");
+            break;
+        }
+      }
     }
   };
 
@@ -78,7 +104,13 @@ function CategoryForm({ data }: { data?: commonZodSchemas.categoryT }) {
         </div>
       </form>
       <div className="py-3">
-        <Button text={data ? "Update" : "Add"} action={handleSubmit(submit)} />
+        <Button
+          text={data ? "Update" : "Add"}
+          action={handleSubmit(submit, (e) => {
+            console.log(e);
+          })}
+          fullwidth
+        />
       </div>
     </>
   );

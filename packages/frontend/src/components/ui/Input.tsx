@@ -48,7 +48,9 @@ function Input({
         return (
           <select {...registory}>
             {options.options.map((item) => (
-              <option value={item}>{item}</option>
+              <option key={item} value={item}>
+                {item}
+              </option>
             ))}
           </select>
         );

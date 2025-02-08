@@ -1,3 +1,5 @@
+import { AppEntities } from "common";
+
    
 export function trimArray<T>(array:T[], maxLength:number) {
     if (array.length  > maxLength) {
@@ -15,3 +17,25 @@ export function getTimeDifference(dateString1:string, dateString2:string) {
 
     return Difference_In_Days
 }
+
+export function getZodIgnoreList(entity:AppEntities):Record<string, boolean> {
+         switch (entity) {
+           case "Category":
+             return {_id:true}
+             break;
+           case "Car":
+             return {_id:true, categoryId:true}
+             break;
+           case "Order":
+             return {_id:true, carId:true, userId:true}
+             break;
+           case "User":
+             return {_id:true}
+             break;
+         
+           default:
+             return {}
+             break;
+         }
+       
+} 

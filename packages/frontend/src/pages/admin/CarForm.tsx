@@ -1,11 +1,12 @@
 import React, { useContext, useRef } from "react";
 import { useForm } from "react-hook-form";
 import Input from "../../components/ui/Input";
-import { commonZodSchemas } from "common";
+import { commonZodSchemas } from "common/src";
 import Button from "../../components/ui/Button";
 import axios from "axios";
 import { backendUrl } from "../../constants";
 import { AppContext } from "../../components/contextProviders/AppContextProvider";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 function CarForm({ data }: { data?: commonZodSchemas.carT }) {
   const {
@@ -13,21 +14,27 @@ function CarForm({ data }: { data?: commonZodSchemas.carT }) {
     handleSubmit,
     formState: { errors },
     reset,
+    setError,
   } = useForm<commonZodSchemas.carT>({
     defaultValues: {
       _id: data?._id || "",
       //   location: { formatedName: "jjshhs", lat: 7777, lng: 999 },
     },
-    // resolver: zodResolver(
-    //   commonZodSchemas.appEntitiesSchemas.Category.omit({ _id: true })
-    // ),
+    resolver: zodResolver(
+      commonZodSchemas.appEntitiesSchemas.Car.passthrough().omit({
+        _id: true,
+        categoryId: true,
+      })
+    ),
   });
   const ref = useRef<HTMLFormElement | null>(null);
   const context = useContext(AppContext);
   const submit = async (data: commonZodSchemas.carT) => {
+    console.log(data);
+
     try {
       if (!ref.current || !context) {
-        throw new Error("");
+        throw new Error("No form or context");
       }
       const formData = new FormData(ref.current);
       const category = context.categories.find(
@@ -35,7 +42,12 @@ function CarForm({ data }: { data?: commonZodSchemas.carT }) {
       );
 
       if (!category) {
-        throw new Error("");
+        throw new Error("can't find category");
+      }
+      const image = formData.get("image") as File;
+      if (!image.size) {
+        setError("image", { message: "Required" });
+        throw new Error("image");
       }
       formData.set("categoryId", category._id as string);
       const res = await axios.post(`${backendUrl}/car`, formData);
@@ -43,7 +55,18 @@ function CarForm({ data }: { data?: commonZodSchemas.carT }) {
       context.updateFunc("Car");
       reset();
     } catch (error) {
-      alert("An error occurred");
+      console.log(error);
+      if (error instanceof Error) {
+        switch (error.message) {
+          case "image":
+            alert("Image Required");
+            break;
+
+          default:
+            alert("An error occurred");
+            break;
+        }
+      }
     }
   };
   if (!context) {
@@ -100,17 +123,15 @@ function CarForm({ data }: { data?: commonZodSchemas.carT }) {
             error={errors.reservationPricePerDay?.message}
           />
         </div>
-        <div>
-          <Input
-            lableText="Price Per Km"
-            registory={register("ridePricePerKm")}
-            options={{ __type: "number" }}
-            error={errors.reservationPricePerDay?.message}
-          />
-        </div>
       </form>
       <div className="py-3">
-        <Button text={data ? "Update" : "Add"} action={handleSubmit(submit)} />
+        <Button
+          text={data ? "Update" : "Add"}
+          action={handleSubmit(submit, (e) => {
+            console.log(e);
+          })}
+          fullwidth
+        />
       </div>
     </>
   );

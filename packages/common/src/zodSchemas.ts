@@ -15,8 +15,8 @@ export type locationT = z.infer<typeof locationSchema>
 
 export const categorySchema = z.object({
     _id:zId(),
-    name:baseString,
-    description:baseString,
+    name:baseString.min(4),
+    description:baseString.min(10),
     image:baseString,
     secondaryImage:baseString
 })
@@ -30,7 +30,7 @@ export const carSchema = z.object({
     image:baseString,
     available:z.boolean().optional(),
     reservationPricePerDay:baseNumber.positive(),
-    ridePricePerKm:baseNumber,
+   // ridePricePerKm:baseNumber,
   //  location:locationSchema.optional()
 })
 export type carT = z.infer<typeof carSchema>

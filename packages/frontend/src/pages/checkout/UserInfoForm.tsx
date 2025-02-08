@@ -4,7 +4,10 @@ import { useForm, UseFormReturn } from "react-hook-form";
 import Input from "../../components/ui/Input";
 
 function UserInfoForm({ form }: { form: UseFormReturn<userT> }) {
-  const { register } = form;
+  const {
+    register,
+    formState: { errors },
+  } = form;
   return (
     <div>
       <h3 className="py-4">Billing Information</h3>
@@ -14,6 +17,7 @@ function UserInfoForm({ form }: { form: UseFormReturn<userT> }) {
             lableText="First name"
             registory={register("firstName")}
             options={{ __type: "text" }}
+            error={errors.firstName?.message}
           />
         </div>
         <div className="flex-1">
@@ -21,6 +25,7 @@ function UserInfoForm({ form }: { form: UseFormReturn<userT> }) {
             lableText="Last name"
             registory={register("lastName")}
             options={{ __type: "text" }}
+            error={errors.lastName?.message}
           />
         </div>
       </div>
@@ -29,6 +34,7 @@ function UserInfoForm({ form }: { form: UseFormReturn<userT> }) {
           registory={register("country")}
           lableText="Country"
           options={{ __type: "select", options: countryList }}
+          error={errors.country?.message}
         />
       </div>
       <div>
@@ -36,6 +42,7 @@ function UserInfoForm({ form }: { form: UseFormReturn<userT> }) {
           registory={register("street")}
           lableText="Street address"
           options={{ __type: "text" }}
+          error={errors.street?.message}
         />
       </div>
       <div>
@@ -43,6 +50,7 @@ function UserInfoForm({ form }: { form: UseFormReturn<userT> }) {
           registory={register("city")}
           lableText="City"
           options={{ __type: "text" }}
+          error={errors.city?.message}
         />
       </div>
       <div>
@@ -50,6 +58,7 @@ function UserInfoForm({ form }: { form: UseFormReturn<userT> }) {
           registory={register("state")}
           lableText="State"
           options={{ __type: "text" }}
+          error={errors.state?.message}
         />
       </div>
       <div>
@@ -57,6 +66,7 @@ function UserInfoForm({ form }: { form: UseFormReturn<userT> }) {
           registory={register("zipCode")}
           lableText="Zip Code"
           options={{ __type: "text" }}
+          error={errors.zipCode?.message}
         />
       </div>
       <div>
@@ -64,6 +74,7 @@ function UserInfoForm({ form }: { form: UseFormReturn<userT> }) {
           registory={register("phone")}
           lableText="Phone"
           options={{ __type: "text" }}
+          error={errors.phone?.message}
         />
       </div>
       <div>
@@ -71,6 +82,7 @@ function UserInfoForm({ form }: { form: UseFormReturn<userT> }) {
           registory={register("email")}
           lableText="Email address"
           options={{ __type: "text" }}
+          error={errors.email?.message}
         />
       </div>
     </div>

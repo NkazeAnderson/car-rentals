@@ -33,4 +33,9 @@
     .colSmColLg {
         @apply flex flex-col lg:flex-row space-y-4 lg:space-y-0 space-x-0 lg:space-x-4
     }
+    .customShadow{
+        -webkit-box-shadow: 0px 0px 12px 0px rgba(0,0,0,0.75);
+-moz-box-shadow: 0px 0px 12px 0px rgba(0,0,0,0.75);
+box-shadow: 0px 0px 12px 0px rgba(0,0,0,0.75);
+    }
 }

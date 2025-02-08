@@ -16,11 +16,14 @@ import UserInfoForm from "./UserInfoForm";
 import { userSchema, userT } from "common/src/zodSchemas";
 import crud from "../../utils/crud";
 import { AppEntities } from "common/src";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { getZodIgnoreList } from "../../utils";
 
 function CheckoutPage() {
   const { cart, removeItemFromCart, user, setUserInfo } = useContext(
     AppContext
   ) as appContextT;
+  const [userId, setuserId] = useState("");
   const navigate = useNavigate();
   if (!cart.length) {
     setTimeout(() => {
@@ -28,33 +31,21 @@ function CheckoutPage() {
     }, 1000);
   }
   const orderForm = useForm<{ orderNote: string }>();
-  const userInfoForm = useForm<userT>({ defaultValues: user });
-  async function addUserDb() {
+  const userInfoForm = useForm<userT>({
+    defaultValues: user,
+    //@ts-ignore
+    resolver: zodResolver(userSchema.omit(getZodIgnoreList(AppEntities.User))),
+  });
+  async function addUserDb(user: userT) {
     try {
-      const user = userSchema
-        .omit({ _id: true })
-        .parse(userInfoForm.getValues());
       const { id } = await crud.create(user, AppEntities.User);
       setUserInfo({ ...user, _id: id });
       localStorage.setItem("userId", id);
-      return id;
-    } catch (error) {
-      console.log(error);
-      alert("An error occured");
-    }
-  }
-  async function placeOrders() {
-    try {
+      setuserId(id);
+      cart.forEach((_, index) => {
+        cart[index].userId = id;
+      });
       const { orderNote } = orderForm.getValues();
-      if (!user) {
-        const userId = await addUserDb();
-        if (!userId) {
-          throw new Error("Error Creating user");
-        }
-        cart.forEach((_, index) => {
-          cart[index].userId = userId;
-        });
-      }
       if (orderNote) {
         cart.forEach((_, index) => {
           cart[index].notes = orderNote;
@@ -65,8 +56,10 @@ function CheckoutPage() {
         removeItemFromCart(order);
       }
       userInfoForm.reset();
+      return id;
     } catch (error) {
       console.log(error);
+      alert("An error occured");
     }
   }
 
@@ -164,7 +157,11 @@ function CheckoutPage() {
             in our Privacy policy.
           </p>
           <div className="py-3">
-            <Button text="Place Order" fullwidth action={placeOrders} />
+            <Button
+              text="Place Order"
+              fullwidth
+              action={userInfoForm.handleSubmit(addUserDb)}
+            />
           </div>
         </div>
       </div>
