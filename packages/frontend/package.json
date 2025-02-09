@@ -11,14 +11,13 @@
     "postCSS": "npx tailwindcss -i ./input.css -o ./src/App.css --watch"
   },
   "dependencies": {
-    "@gsap/react": "^2.1.2",
     "@hookform/resolvers": "^3.10.0",
     "@tailwindcss/vite": "^4.0.1",
     "@zodyac/zod-mongoose": "^3.2.0",
     "axios": "^1.7.9",
     "common": "^1.0.0",
-    "gsap": "^3.12.7",
     "mongoose": "^8.9.6",
+    "motion": "^12.4.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-hook-form": "^7.54.2",

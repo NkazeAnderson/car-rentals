@@ -46,7 +46,8 @@ export const userSchema = z.object({
     street:baseString.min(5),
     city:baseString.min(2),
     state:baseString.min(2),
-    zipCode:baseString.min(2)
+    zipCode:baseString.min(2),
+    isAdmin:z.boolean().default(false).optional()
 })
 export type userT = z.infer<typeof userSchema>
 

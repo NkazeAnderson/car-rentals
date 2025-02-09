@@ -41,7 +41,7 @@ function CategoryForm({ data }: { data?: commonZodSchemas.categoryT }) {
         throw new Error("secondaryImage");
       }
 
-      //const res = await axios.post(`${backendUrl}/category`, formData);
+      const res = await axios.post(`${backendUrl}/category`, formData);
       //@ts-ignore
       context.updateFunc("Category");
       reset();

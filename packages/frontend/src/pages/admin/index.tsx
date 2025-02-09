@@ -12,6 +12,7 @@ import crud from "../../utils/crud";
 import { AppEntities } from "common/src";
 import { carT, orderT, userT } from "common/src/zodSchemas";
 import { backendUrl } from "../../constants";
+import { useNavigate } from "react-router";
 
 function AdminPage() {
   const [orders, setOrders] = useState<orderT[]>([]);
@@ -19,7 +20,7 @@ function AdminPage() {
     (orderT & { car: carT; user: userT })[]
   >([]);
   const [users, setUsers] = useState<userT[]>([]);
-  const { cars, categories } = useContext(AppContext) as appContextT;
+  const { cars, categories, user } = useContext(AppContext) as appContextT;
   async function getOrders() {
     const orders = await crud.list(AppEntities.Order);
     setOrders(orders);
@@ -28,6 +29,7 @@ function AdminPage() {
     const users = await crud.list(AppEntities.User);
     setUsers(users);
   }
+  const navigate = useNavigate();
   useEffect(() => {
     getUsers().then(() => {
       getOrders();
@@ -43,6 +45,9 @@ function AdminPage() {
     });
     setOrdersWithInfo(ordersInfo);
   }, [orders]);
+  if (!user?.isAdmin) {
+    navigate("/login");
+  }
   return (
     <Container>
       <div className="py-4">

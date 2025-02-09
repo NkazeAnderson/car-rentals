@@ -23,7 +23,7 @@ function CarCollectionSection() {
         </Container>
       </div>
       <div className="py-8 px-4">
-        <div className="grid grid-cols-2 lg:grid-cols-4 ">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-2">
           {trimArray(context.categories, 8).map((item) => (
             <CarCollection category={item} />
           ))}

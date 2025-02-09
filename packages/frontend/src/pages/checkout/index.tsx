@@ -20,9 +20,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { getZodIgnoreList } from "../../utils";
 
 function CheckoutPage() {
-  const { cart, removeItemFromCart, user, setUserInfo } = useContext(
-    AppContext
-  ) as appContextT;
+  const { cart, removeItemFromCart, user, setUserInfo, updateFunc } =
+    useContext(AppContext) as appContextT;
   const [userId, setuserId] = useState("");
   const navigate = useNavigate();
   if (!cart.length) {
@@ -42,6 +41,7 @@ function CheckoutPage() {
       setUserInfo({ ...user, _id: id });
       localStorage.setItem("userId", id);
       setuserId(id);
+      updateFunc(AppEntities.User);
       cart.forEach((_, index) => {
         cart[index].userId = id;
       });

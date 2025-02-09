@@ -10,10 +10,10 @@ export const contactInfo = {
 export const navMenu: {path:string, text:string}[] = [
     {path:"/", text:"home"},
     {path:"/categories", text:"vehicle categories"},
-    {path:"/services", text:"services"},
-    {path:"/admin", text:"admin"},
-    {path:"/contact-us", text:"contact us"},
     {path:"/about-us", text:"about us"},
+    {path:"/services", text:"services"},
+    {path:"/contact-us", text:"contact us"},
+    {path:"/admin", text:"admin"},
 ]
 
 export const backendUrl =  "http://localhost:3000"

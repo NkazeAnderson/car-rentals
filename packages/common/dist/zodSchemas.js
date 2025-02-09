@@ -42,7 +42,8 @@ exports.userSchema = zod_1.z.object({
     street: baseString.min(5),
     city: baseString.min(2),
     state: baseString.min(2),
-    zipCode: baseString.min(2)
+    zipCode: baseString.min(2),
+    isAdmin: zod_1.z.boolean().default(false).optional()
 });
 exports.rideData = zod_1.z.object({
     type: zod_1.z.enum(["Ride"]).default("Ride"),

@@ -48,27 +48,19 @@ function AppContextProvider({ children }: { children: React.ReactNode }) {
   }
   useEffect(() => {
     crud.list(AppEntities.Category).then((res) => {
-      console.log(res);
-      if (Array.isArray(res)) {
-        res = res.map((item) => {
-          item.image = `${backendUrl}/images/${item.image}`;
-          item.secondaryImage = `${backendUrl}/images/${item.secondaryImage}`;
-          return item;
-        });
-      }
       setCategories(res);
     });
     //@ts-ignore
     crud.list("Car").then((res) => {
-      console.log(res);
-      if (Array.isArray(res)) {
-        res = res.map((item) => {
-          item.image = `${backendUrl}/images/${item.image}`;
-          return item;
-        });
-      }
       setCars(res);
     });
+    const userId = localStorage.getItem("userId");
+    if (userId) {
+      crud.get(userId, AppEntities.User).then((res) => {
+        console.log(res);
+        setUser(res);
+      });
+    }
   }, []);
   useEffect(() => {
     update &&
@@ -85,6 +77,15 @@ function AppContextProvider({ children }: { children: React.ReactNode }) {
         //@ts-ignore
         setCars(res);
       });
+    if (update && update === AppEntities.User) {
+      const userId = localStorage.getItem("userId");
+      if (userId) {
+        crud.get(userId, AppEntities.User).then((res) => {
+          console.log(res);
+          setUser(res);
+        });
+      }
+    }
   }, [update]);
 
   useEffect(() => {

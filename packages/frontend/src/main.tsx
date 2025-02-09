@@ -2,8 +2,6 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router";
 import App from "./App.tsx";
-import gsap from "gsap";
-import { useGSAP } from "@gsap/react";
 import Home from "./pages/home/index.tsx";
 import CategoriesPage from "./pages/categories/index.tsx";
 import CategoryProductsPage from "./pages/categories/products/index.tsx";
@@ -14,7 +12,7 @@ import CheckoutPage from "./pages/checkout/index.tsx";
 import ServicesPage from "./pages/services/index.tsx";
 import ContactUsPage from "./pages/contact-us/index.tsx";
 import AboutUsPage from "./pages/about-us/index.tsx";
-gsap.registerPlugin(useGSAP);
+import LogInPage from "./pages/login/index.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -31,6 +29,7 @@ createRoot(document.getElementById("root")!).render(
           <Route path="/services" element={<ServicesPage />} />
           <Route path="/contact-us" element={<ContactUsPage />} />
           <Route path="/about-us" element={<AboutUsPage />} />
+          <Route path="/login" element={<LogInPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

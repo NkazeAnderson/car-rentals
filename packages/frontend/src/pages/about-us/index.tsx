@@ -58,7 +58,7 @@ function AboutUsPage() {
     <div className="pb-4">
       <PageHeader backgroundImg={headerImage} text="About us" />
       <Container>
-        <div className="space-y-11">
+        <div className="space-y-[100px]">
           <div className="my-16 flex flex-col lg:flex-row items-stretch">
             <div className="lg:flex-[2] space-y-3">
               <h2>Bone Voyage Car-rentals</h2>
@@ -85,8 +85,10 @@ function AboutUsPage() {
             </div>
           </div>
           <div className="my-10">
-            <h2 className="text-center">Why Choose Our Car Rental Services?</h2>
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-3">
+            <h2 className="text-center pb-12">
+              Why Choose Our Car Rental Services?
+            </h2>
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
               {reasons.map((reason, i) => (
                 <ShadowCard key={i}>
                   <div className="space-y-3 capitalize">
@@ -95,8 +97,10 @@ function AboutUsPage() {
                         <b>{reason.title}</b>
                       </p>
                     </div>
-                    <div className="text-gray-600 text-[10px] leading-4">
-                      <p>{reason.description}</p>
+                    <div className="text-gray-600 ">
+                      <p className="text-[16px] leading-8">
+                        {reason.description}
+                      </p>
                     </div>
                   </div>
                 </ShadowCard>

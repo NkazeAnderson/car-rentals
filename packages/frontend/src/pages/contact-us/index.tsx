@@ -61,7 +61,7 @@ function ContactUsPage() {
       <PageHeader backgroundImg={headerImage} text="Services" />
       <Container>
         <div className="space-y-11">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-2">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
             <ShadowCard>
               <div className="flex flex-col items-center space-y-3 text-center">
                 <HiLocationMarker className="text-[50px] text-orange-600" />
@@ -87,7 +87,7 @@ function ContactUsPage() {
               </div>
             </ShadowCard>
           </div>
-          <div className="my-16 flex flex-col lg:flex-row">
+          <div className="my-16 flex flex-col lg:flex-row pt-10 space-x-10">
             <div className="lg:flex-[2] space-y-3">
               <Logo />
               <h2>Bone Voyage Car-rentals</h2>
@@ -128,11 +128,11 @@ function ContactUsPage() {
               </ShadowCard>
             </div>
           </div>
-          <div className="my-10">
-            <h2 className="text-center">
+          <div className="pt-[100px]">
+            <h2 className="text-center pb-10">
               Our branches across the United States
             </h2>
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-3">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
               {branches.map((branch, i) => (
                 <ShadowCard key={i}>
                   <div className="space-y-3 capitalize">
@@ -142,10 +142,10 @@ function ContactUsPage() {
                       </p>
                       <p className="text-gray-400 italic">{branch.location}</p>
                     </div>
-                    <div className="text-gray-600 text-[10px] leading-4">
-                      <p>{branch.phone}</p>
-                      <p>{branch.email}</p>
-                      <p>{branch.address}</p>
+                    <div className="text-gray-600  ">
+                      <p className="text-[14px] leading-8">{branch.phone}</p>
+                      <p className="text-[14px] leading-8">{branch.email}</p>
+                      <p className="text-[14px] leading-8">{branch.address}</p>
                     </div>
                   </div>
                 </ShadowCard>

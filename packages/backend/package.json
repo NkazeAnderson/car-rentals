@@ -15,6 +15,7 @@
     "@zodyac/zod-mongoose": "^3.2.0",
     "body-parser": "^1.20.3",
     "common": "^1.0.0",
+    "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
     "express": "^4.21.2",
     "express-form-data": "^2.0.23",
@@ -22,6 +23,7 @@
     "morgan": "^1.10.0"
   },
   "devDependencies": {
+    "@types/cookie-parser": "^1.4.8",
     "@types/cors": "^2.8.17",
     "@types/express": "^5.0.0",
     "@types/express-form-data": "^2.0.5",
