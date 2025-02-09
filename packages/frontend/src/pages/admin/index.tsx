@@ -13,6 +13,7 @@ import { AppEntities } from "common/src";
 import { carT, orderT, userT } from "common/src/zodSchemas";
 import { backendUrl } from "../../constants";
 import { useNavigate } from "react-router";
+import { getTimeDifference } from "../../utils";
 
 function AdminPage() {
   const [orders, setOrders] = useState<orderT[]>([]);
@@ -63,12 +64,19 @@ function AdminPage() {
       <div>
         <h2>Orders</h2>
         {ordersWithInfo.map((item) => (
-          <div className="my-3 border p-2">
-            <h4>Car</h4>
-            <p>{item.car.name}</p>
-            <img className="size-14" src={`${item.car.image}`} alt="" />
-            <div className="py-2">
-              <h4>Order details</h4>
+          <div
+            key={item._id.toString()}
+            className="my-3 border p-2 border-orange-600/25 rounded-xl  colSmColLg bg-gray-400/20 space-x-7"
+          >
+            <div>
+              <h4 className="underline">Car</h4>
+              <p className=" capitalize text-orange-600 text-[18px]">
+                {item.car.name}
+              </p>
+              <img className="size-[150px]" src={`${item.car.image}`} alt="" />
+            </div>
+            <div className="py-2 flex-grow">
+              <h4 className="underline pb-9">Order details</h4>
               {item.info.type === "Reservation" && (
                 <div>
                   <p>
@@ -77,11 +85,24 @@ function AdminPage() {
                   <p>
                     <b>End date:</b> {item.info.start}
                   </p>
+                  <p>
+                    <b>Number of cars desired:</b> {item.quantity}
+                  </p>
+                  <p>
+                    <b>Number of days:</b>{" "}
+                    {getTimeDifference(item.info.start, item.info.end)}
+                  </p>
+                  <p>
+                    <b>Total Cost:</b> $
+                    {item.quantity *
+                      item.car.reservationPricePerDay *
+                      getTimeDifference(item.info.start, item.info.end)}
+                  </p>
                 </div>
               )}
             </div>
             <div>
-              <h4>User</h4>
+              <h4 className="underline pb-9">User</h4>
               <div>
                 <p>
                   <b>Name:</b> {item.user.firstName + " " + item.user.lastName}

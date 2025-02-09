@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AppEntitityForcedRuntime = exports.AppEntities = void 0;
+exports.frontendUrl = exports.backendUrl = exports.AppEntitityForcedRuntime = exports.AppEntities = void 0;
 var AppEntities;
 (function (AppEntities) {
     AppEntities["Category"] = "Category";
@@ -14,3 +14,5 @@ exports.AppEntitityForcedRuntime = {
     [AppEntities.Order]: AppEntities.Order,
     [AppEntities.User]: AppEntities.User,
 };
+exports.backendUrl = "http://localhost:3000";
+exports.frontendUrl = "http://localhost:5173";

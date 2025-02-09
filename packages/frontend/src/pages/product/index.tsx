@@ -25,6 +25,7 @@ function ProductPage() {
             : context.user
         }
         addItemToCart={context.addItemToCart}
+        initialReservation={context.initialReservation}
       />
       <div className="my-6">
         <div className="flex">

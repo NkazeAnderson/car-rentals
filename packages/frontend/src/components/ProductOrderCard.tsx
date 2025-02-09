@@ -13,13 +13,15 @@ function ProductOrderCard({
   product,
   userId,
   addItemToCart,
+  initialReservation,
 }: {
   product: carT;
   addItemToCart: appContextT["addItemToCart"];
   userId?: string;
+  initialReservation?: reservationDataT;
 }) {
   const reservationForm = useForm<reservationDataT>({
-    defaultValues: { type: "Reservation" },
+    defaultValues: initialReservation || { type: "Reservation" },
   });
   const navigate = useNavigate();
   const orderForm = useForm<orderT>({ defaultValues: { quantity: 1 } });

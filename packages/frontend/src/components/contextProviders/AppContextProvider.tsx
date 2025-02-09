@@ -1,7 +1,13 @@
 import { AppEntities } from "common/src";
 import React, { createContext, useEffect, useState } from "react";
 import crud from "../../utils/crud";
-import { carT, categoryT, orderT, userT } from "common/src/zodSchemas";
+import {
+  carT,
+  categoryT,
+  orderT,
+  reservationDataT,
+  userT,
+} from "common/src/zodSchemas";
 import { backendUrl } from "../../constants";
 
 export type cartItemT = orderT & {
@@ -16,6 +22,8 @@ export type appContextT = {
   removeItemFromCart: (order: cartItemT) => void;
   user?: userT;
   setUserInfo: (user: userT) => void;
+  initialReservation?: reservationDataT;
+  setInitialReservationInfo: (reservationData?: reservationDataT) => void;
 };
 export const AppContext = createContext<null | appContextT>(null);
 
@@ -23,8 +31,14 @@ function AppContextProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<appContextT["user"]>(undefined);
   const [categories, setCategories] = useState<appContextT["categories"]>([]);
   const [cars, setCars] = useState<appContextT["cars"]>([]);
+  const [initialReservation, setInitialReservation] = useState<
+    reservationDataT | undefined
+  >();
   const [cart, setCart] = useState<appContextT["cart"]>([]);
   const [update, setUpdate] = useState<AppEntities | undefined>(undefined);
+  function setInitialReservationInfo(reservationData?: reservationDataT) {
+    setInitialReservation(reservationData || undefined);
+  }
   function addItemToCart(order: cartItemT) {
     setCart((prev) => {
       const existingOrderIndex = prev.findIndex(
@@ -57,7 +71,6 @@ function AppContextProvider({ children }: { children: React.ReactNode }) {
     const userId = localStorage.getItem("userId");
     if (userId) {
       crud.get(userId, AppEntities.User).then((res) => {
-        console.log(res);
         setUser(res);
       });
     }
@@ -106,6 +119,8 @@ function AppContextProvider({ children }: { children: React.ReactNode }) {
         addItemToCart,
         user,
         setUserInfo,
+        initialReservation,
+        setInitialReservationInfo,
       }}
     >
       {children}

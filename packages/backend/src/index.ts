@@ -7,9 +7,11 @@ import cors from "cors"
 import routes from './routes';
 import cookie_parser from "cookie-parser"
 import models from './models/models';
+import { userT } from 'common/src/zodSchemas';
+import { frontendUrl } from 'common';
 
 const app = express();
-mongoose.connect("mongodb://localhost:27017/CarRentals").then(()=>{
+mongoose.connect("mongodb+srv://nkazeanderso:waletest@cluster0.unrodzu.mongodb.net/CarRentals").then(()=>{
   console.log("Successfully connected to database")
 }).catch(e=>console.error(e))
 const port = process.env.PORT || 3000;
@@ -19,7 +21,7 @@ const jsonParser = bodyParser.json()
 const formDataParser = formData.parse({uploadDir:__dirname+"/../images"})
 const urlEncoded = bodyParser.urlencoded({ extended: true })
 
-app.use(cors({origin:"http://localhost:5173", credentials:true}))
+app.use(cors({origin:frontendUrl, credentials:true}))
 app.use(cookie_parser('1234'))
 app.use(logger,jsonParser, urlEncoded)
 app.use(formDataParser);
@@ -63,6 +65,39 @@ app.get('/', (req: Request, res: Response) => {
         else {
           throw new Error("can't find user");
         }
+      }
+      else {
+        throw new Error("Invalid cred");
+      }
+    } catch (error) {
+      next(error)
+    }
+  })
+  app.post("/createAdmin",async (req, res, next)=>{
+    try {    
+      const email = req.body.email
+      const password = req.body.code
+      const name = req.body.name
+      if (!email || !password || !name){
+        throw new Error("Email and Password Required")
+      }
+      if (password === "1234") {
+        const [firstName, ...rest] = String(name).split(" ")
+        const user:userT = {
+          _id:crypto.randomUUID().split("-").join("").substring(0,24),
+          email,
+          firstName,
+          lastName: rest.join(" "),
+          phone:"+17777777777",
+          street:"123 west new york",
+          state:"New York",
+          city:"New York City",
+          country:"United States",
+          zipCode:"100023",
+          isAdmin:true
+        }
+        const data = await models.User.create(user)
+        res.json({id:data._id})
       }
       else {
         throw new Error("Invalid cred");

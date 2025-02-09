@@ -7,6 +7,7 @@ import NavBarMenu from "./NavBarMenu";
 import { FaCircleXmark } from "react-icons/fa6";
 import { useLocation } from "react-router";
 import { AppContext, appContextT } from "./contextProviders/AppContextProvider";
+import ContactDetails from "./ContactDetails";
 
 function NavBar() {
   const [mobileMenuOpen, setmobileMenuOpen] = useState(
@@ -34,27 +35,17 @@ function NavBar() {
     <>
       <div className="bg-gray-900 py-3">
         <Container>
-          <div className="flex item-center justify-between text-[12px] font-light">
-            <div className=" text-white">
-              <p>
-                Call now: <b>{contactInfo.phone}</b>
-              </p>
-              <p>
-                Email <b>{contactInfo.email}</b>
-              </p>
-              <p>
-                Address: <b>{contactInfo.address}</b>
-              </p>
-            </div>
-            <div className="flex space-x-5 text-amber-700 text-[18px]">
+          <div className="flex item-center justify-between  font-light">
+            <ContactDetails />
+            <div className="flex space-x-5 text-amber-700 ">
               <a href="/">
-                <FaFacebook />
+                <FaFacebook style={{ fontSize: 28 }} />
               </a>
               <a href="/">
-                <FaInstagram />
+                <FaInstagram style={{ fontSize: 28 }} />
               </a>
               <a href="/">
-                <FaTwitter />
+                <FaTwitter style={{ fontSize: 28 }} />
               </a>
             </div>
           </div>

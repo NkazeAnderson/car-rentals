@@ -2,6 +2,7 @@ import React from "react";
 import Logo from "./ui/Logo";
 import { Link } from "react-router";
 import { contactInfo } from "../constants";
+import ContactDetails from "./ContactDetails";
 
 function Footer() {
   return (
@@ -12,16 +13,30 @@ function Footer() {
         </div>
         <div className="flex space-x-4 lg:flex-[2]">
           <div className="flex-1  border-slate-300 border-t p-2">
-            <Link to={"/"}>Home</Link>
+            <p>
+              <Link to={"/"}>Home</Link>
+            </p>
+            <p>
+              <Link to={"/services"}>Service</Link>
+            </p>
+            <p>
+              <Link to={"/about-us"}>About Us</Link>
+            </p>
           </div>
           <div className="flex-1 border-slate-300 border-t p-2">
-            <Link to={"/"}>Home</Link>
+            <p>
+              <Link to={"/categories"}>Catetgories</Link>
+            </p>
+            <p>
+              <Link to={"/contact-us"}>Contact Us</Link>
+            </p>
+            <p>
+              <Link to={"/Privacy"}>Privacy</Link>
+            </p>
           </div>
         </div>
-        <div className="flex-1 border-slate-300 border-t p-2 font-semibold">
-          <p>{contactInfo.phone}</p>
-          <p>{contactInfo.email}</p>
-          <p>{contactInfo.address}</p>
+        <div className="flex-1 border-slate-300 border-t p-2">
+          <ContactDetails />
         </div>
       </div>
     </div>

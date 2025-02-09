@@ -19,12 +19,44 @@ const common_2 = require("common");
 const handlers_1 = require("./handlers");
 const routes = (0, express_1.Router)();
 const { appEntitiesSchemas } = common_2.commonZodSchemas;
+function routeProtection(entity, method, signedUserId) {
+    switch (method) {
+        case "get":
+            if (entity === common_1.AppEntities.Order && !signedUserId) {
+                throw new Error("UnAuthorized");
+            }
+            break;
+        case "list":
+            if ((entity === common_1.AppEntities.Order || entity === common_1.AppEntities.User) && !signedUserId) {
+                throw new Error("UnAuthorized");
+            }
+            break;
+        case "create":
+            if ((entity === common_1.AppEntities.Car || entity === common_1.AppEntities.Category) && !signedUserId) {
+                throw new Error("UnAuthorized");
+            }
+            break;
+        case "delete":
+            if (!signedUserId) {
+                throw new Error("UnAuthorized");
+            }
+            break;
+        case "update":
+            if (!signedUserId) {
+                throw new Error("UnAuthorized");
+            }
+            break;
+        default:
+            break;
+    }
+}
 function generateCrudRoutes(entity) {
     const basePath = entity.toLocaleLowerCase();
     const schema = appEntitiesSchemas[entity];
     routes.get(`/${basePath}/:id`, (req, res, next) => __awaiter(this, void 0, void 0, function* () {
         (0, handlers_1.routeHandler)(next, () => __awaiter(this, void 0, void 0, function* () {
             const id = req.params.id;
+            routeProtection(entity, "get", req.signedCookies.userId);
             const data = yield (0, handlers_1.functionExecWithErrorResponder)(() => __awaiter(this, void 0, void 0, function* () { return yield crud_1.default.get(entity, id); }), { code: 400, message: "Can't find item with Id" });
             const parsedData = yield (0, handlers_1.functionExecWithErrorResponder)(() => __awaiter(this, void 0, void 0, function* () { return schema.passthrough().parse(data); }), { code: 500, message: "" });
             res.json(parsedData);
@@ -32,6 +64,7 @@ function generateCrudRoutes(entity) {
     }));
     routes.get(`/${basePath}`, (req, res, next) => __awaiter(this, void 0, void 0, function* () {
         (0, handlers_1.routeHandler)(next, () => __awaiter(this, void 0, void 0, function* () {
+            routeProtection(entity, "list", req.signedCookies.userId);
             const data = yield (0, handlers_1.functionExecWithErrorResponder)(() => __awaiter(this, void 0, void 0, function* () { return yield crud_1.default.list(entity); }), { code: 400, message: "Can't find items" });
             const parsedData = yield (0, handlers_1.functionExecWithErrorResponder)(() => __awaiter(this, void 0, void 0, function* () { return schema.passthrough().array().parse(data); }), { code: 500, message: "" });
             res.json(parsedData);
@@ -39,9 +72,7 @@ function generateCrudRoutes(entity) {
     }));
     routes.post(`/${basePath}`, (req, res, next) => __awaiter(this, void 0, void 0, function* () {
         (0, handlers_1.routeHandler)(next, () => __awaiter(this, void 0, void 0, function* () {
-            console.log("body", req.body);
-            //@ts-ignore
-            console.log("file", req.files);
+            // routeProtection(entity, "create", req.signedCookies.userId )
             //@ts-ignore
             const parsedData = yield (0, handlers_1.functionExecWithErrorResponder)(() => __awaiter(this, void 0, void 0, function* () { return schema.omit({ "_id": true }).parse(req.body); }), { code: 400, message: "" });
             const id = yield (0, handlers_1.functionExecWithErrorResponder)(() => __awaiter(this, void 0, void 0, function* () { return yield crud_1.default.create(entity, parsedData); }), { code: 400, message: "This data is malformed" });
@@ -50,6 +81,7 @@ function generateCrudRoutes(entity) {
     }));
     routes.put(`/${basePath}/:id`, (req, res, next) => __awaiter(this, void 0, void 0, function* () {
         (0, handlers_1.routeHandler)(next, () => __awaiter(this, void 0, void 0, function* () {
+            routeProtection(entity, "update", req.signedCookies.userId);
             const parsedData = yield (0, handlers_1.functionExecWithErrorResponder)(() => __awaiter(this, void 0, void 0, function* () { return schema.partial().parse(req.body); }), { code: 400, message: "This data is malformed" });
             const id = req.params.id;
             yield (0, handlers_1.functionExecWithErrorResponder)(() => __awaiter(this, void 0, void 0, function* () { return yield crud_1.default.update(entity, id, parsedData); }), { code: 400, message: "This data is malformed" });
@@ -58,6 +90,7 @@ function generateCrudRoutes(entity) {
     }));
     routes.delete(`/${basePath}/:id`, (req, res, next) => __awaiter(this, void 0, void 0, function* () {
         (0, handlers_1.routeHandler)(next, () => __awaiter(this, void 0, void 0, function* () {
+            routeProtection(entity, "delete", req.signedCookies.userId);
             const id = req.params.id;
             yield (0, handlers_1.functionExecWithErrorResponder)(() => __awaiter(this, void 0, void 0, function* () { return yield crud_1.default.delete(entity, id); }), { code: 400, message: "This data is malformed" });
             res.json({ status: "deleted" });

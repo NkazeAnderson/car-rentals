@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "start:backend:dev": "npm run dev --workspace=backend",
+    "createAdmin": "npm run createAdmin --workspace=backend",
     "start:frontend:dev": "npm run dev --workspace=frontend",
     "start:frontend:postCSS": "npm run postCSS --workspace=frontend",
     "start:common:dev": "npm run dev --workspace=common",
