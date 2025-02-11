@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Container from "../../components/ui/Container";
 import Underliner from "../../components/ui/Underliner";
 import CategoryForm from "./CategoryForm";
@@ -6,12 +6,10 @@ import CarForm from "./CarForm";
 import {
   AppContext,
   appContextT,
-  cartItemT,
 } from "../../components/contextProviders/AppContextProvider";
 import crud from "../../utils/crud";
 import { AppEntities } from "common/src";
 import { carT, orderT, userT } from "common/src/zodSchemas";
-import { backendUrl } from "../../constants";
 import { useNavigate } from "react-router";
 import { getTimeDifference } from "../../utils";
 
@@ -21,7 +19,7 @@ function AdminPage() {
     (orderT & { car: carT; user: userT })[]
   >([]);
   const [users, setUsers] = useState<userT[]>([]);
-  const { cars, categories, user } = useContext(AppContext) as appContextT;
+  const { cars, user } = useContext(AppContext) as appContextT;
   async function getOrders() {
     const orders = await crud.list(AppEntities.Order);
     setOrders(orders);

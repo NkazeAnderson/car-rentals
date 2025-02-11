@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.frontendUrl = exports.backendUrl = exports.AppEntitityForcedRuntime = exports.AppEntities = void 0;
+exports.frontendUrl = exports.backendUrl = exports.contactInfo = exports.AppEntitityForcedRuntime = exports.AppEntities = void 0;
 var AppEntities;
 (function (AppEntities) {
     AppEntities["Category"] = "Category";
@@ -13,6 +13,14 @@ exports.AppEntitityForcedRuntime = {
     [AppEntities.Car]: AppEntities.Car,
     [AppEntities.Order]: AppEntities.Order,
     [AppEntities.User]: AppEntities.User,
+};
+exports.contactInfo = {
+    email: "test@gmail.com",
+    phone: "77377373",
+    address: "asad, ny, 3663",
+    facebook: "/",
+    instagram: "/",
+    twitter: "/"
 };
 exports.backendUrl = "http://localhost:3000";
 exports.frontendUrl = "http://localhost:5173";

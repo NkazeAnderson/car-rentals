@@ -8,7 +8,6 @@ import {
   reservationDataT,
   userT,
 } from "common/src/zodSchemas";
-import { backendUrl } from "../../constants";
 
 export type cartItemT = orderT & {
   extras: { carInfo: carT; days: number; addedAt: number };

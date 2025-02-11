@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import Container from "../../components/ui/Container";
 import ImageGallery from "../../components/ui/ImageGallery";
 import { AppContext } from "../../components/contextProviders/AppContextProvider";

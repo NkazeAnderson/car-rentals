@@ -1,4 +1,3 @@
-import React from "react";
 import { navMenu } from "../constants";
 import NavLinks from "./ui/NavLinks";
 import { userT } from "common/src/zodSchemas";

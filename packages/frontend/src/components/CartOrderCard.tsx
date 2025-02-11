@@ -1,10 +1,4 @@
-import { orderT } from "common/src/zodSchemas";
-import React, { useContext } from "react";
-import {
-  AppContext,
-  appContextT,
-  cartItemT,
-} from "./contextProviders/AppContextProvider";
+import { appContextT, cartItemT } from "./contextProviders/AppContextProvider";
 import { FaCircleXmark } from "react-icons/fa6";
 
 function CartOrderCard({

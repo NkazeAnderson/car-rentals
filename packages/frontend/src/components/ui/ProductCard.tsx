@@ -1,4 +1,3 @@
-import React from "react";
 import Button from "./Button";
 import ImageGallery from "./ImageGallery";
 import { carT } from "common/src/zodSchemas";

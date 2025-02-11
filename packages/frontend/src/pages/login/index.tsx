@@ -1,18 +1,17 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import headerImage from "../../assets/services-banner.jpg";
 import PageHeader from "../../components/PageHeader";
 import Container from "../../components/ui/Container";
 import Input from "../../components/ui/Input";
 import { useForm } from "react-hook-form";
 import Button from "../../components/ui/Button";
-import { backendUrl } from "../../constants";
 import { useNavigate } from "react-router";
 import axios from "axios";
 import {
   AppContext,
   appContextT,
 } from "../../components/contextProviders/AppContextProvider";
-import { AppEntities } from "common/src";
+import { AppEntities, backendUrl } from "common/src";
 
 function LogInPage() {
   const {

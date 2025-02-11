@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { useParams } from "react-router";
 import { AppContext } from "../../components/contextProviders/AppContextProvider";
 import Container from "../../components/ui/Container";

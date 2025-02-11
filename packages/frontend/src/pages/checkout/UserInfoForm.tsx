@@ -1,6 +1,5 @@
 import { countryList, userT } from "common/src/zodSchemas";
-import React from "react";
-import { useForm, UseFormReturn } from "react-hook-form";
+import { UseFormReturn } from "react-hook-form";
 import Input from "../../components/ui/Input";
 
 function UserInfoForm({ form }: { form: UseFormReturn<userT> }) {

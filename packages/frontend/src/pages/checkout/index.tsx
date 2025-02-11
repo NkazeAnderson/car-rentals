@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import { useContext } from "react";
 import Underliner from "../../components/ui/Underliner";
 import { CiCircleCheck } from "react-icons/ci";
 import Button from "../../components/ui/Button";
@@ -7,10 +7,8 @@ import {
   AppContext,
   appContextT,
 } from "../../components/contextProviders/AppContextProvider";
-import CartOrderCard from "../../components/CartOrderCard";
 import Input from "../../components/ui/Input";
 import { useForm } from "react-hook-form";
-import { BiCalendar } from "react-icons/bi";
 import { useNavigate } from "react-router";
 import UserInfoForm from "./UserInfoForm";
 import { userSchema, userT } from "common/src/zodSchemas";
@@ -28,7 +26,6 @@ function CheckoutPage() {
     updateFunc,
     setInitialReservationInfo,
   } = useContext(AppContext) as appContextT;
-  const [userId, setuserId] = useState("");
   const navigate = useNavigate();
   if (!cart.length) {
     setTimeout(() => {
@@ -46,7 +43,6 @@ function CheckoutPage() {
       const { id } = await crud.create(user, AppEntities.User);
       setUserInfo({ ...user, _id: id });
       localStorage.setItem("userId", id);
-      setuserId(id);
       updateFunc(AppEntities.User);
       cart.forEach((_, index) => {
         cart[index].userId = id;

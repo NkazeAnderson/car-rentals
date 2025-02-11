@@ -1,6 +1,5 @@
 import axios from "axios";
-import { backendUrl } from "../constants";
-import { AppEntities } from "common";
+import { AppEntities, backendUrl } from "common/src";
 import { appEntitiesSchemas } from "common/src/zodSchemas";
 import { getZodIgnoreList } from ".";
 

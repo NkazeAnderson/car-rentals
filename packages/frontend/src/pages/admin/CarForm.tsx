@@ -1,10 +1,9 @@
-import React, { useContext, useRef } from "react";
+import { useContext, useRef } from "react";
 import { useForm } from "react-hook-form";
 import Input from "../../components/ui/Input";
-import { commonZodSchemas } from "common/src";
+import { backendUrl, commonZodSchemas } from "common/src";
 import Button from "../../components/ui/Button";
 import axios from "axios";
-import { backendUrl } from "../../constants";
 import { AppContext } from "../../components/contextProviders/AppContextProvider";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -50,7 +49,7 @@ function CarForm({ data }: { data?: commonZodSchemas.carT }) {
         throw new Error("image");
       }
       formData.set("categoryId", category._id as string);
-      const res = await axios.post(`${backendUrl}/car`, formData);
+      await axios.post(`${backendUrl}/car`, formData);
       //@ts-ignore
       context.updateFunc("Car");
       reset();

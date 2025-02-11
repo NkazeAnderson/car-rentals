@@ -1,7 +1,5 @@
-import React from "react";
 import Logo from "./ui/Logo";
 import { Link } from "react-router";
-import { contactInfo } from "../constants";
 import ContactDetails from "./ContactDetails";
 
 function Footer() {

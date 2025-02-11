@@ -1,4 +1,3 @@
-import React from "react";
 import Underliner from "../../components/ui/Underliner";
 import Container from "../../components/ui/Container";
 import IconCard from "../../components/IconCard";

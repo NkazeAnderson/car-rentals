@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import Container from "../../../components/ui/Container";
 import { BiChevronDown } from "react-icons/bi";
 import ProductCard from "../../../components/ui/ProductCard";

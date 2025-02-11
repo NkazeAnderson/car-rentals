@@ -1,15 +1,8 @@
-import React from "react";
 import headerImage from "../../assets/about-us-banner-1.jpg";
-
 import PageHeader from "../../components/PageHeader";
 import ShadowCard from "../../components/ui/ShadowCard";
-import { HiLocationMarker, HiMail, HiPhone } from "react-icons/hi";
-import { contactInfo } from "../../constants";
 import Container from "../../components/ui/Container";
 import Logo from "../../components/ui/Logo";
-import Input from "../../components/ui/Input";
-import { useForm } from "react-hook-form";
-import Button from "../../components/ui/Button";
 
 type reasonsT = {
   title: string;
@@ -49,11 +42,6 @@ const reasons: reasonsT[] = [
 ];
 
 function AboutUsPage() {
-  const { register } = useForm<{
-    name: string;
-    email: string;
-    phone: string;
-  }>();
   return (
     <div className="pb-4">
       <PageHeader backgroundImg={headerImage} text="About us" />

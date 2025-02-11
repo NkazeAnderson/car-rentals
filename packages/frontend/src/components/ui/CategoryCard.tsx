@@ -1,4 +1,3 @@
-import React from "react";
 import ImageGallery from "./ImageGallery";
 import Button from "./Button";
 import { categoryT } from "common/src/zodSchemas";

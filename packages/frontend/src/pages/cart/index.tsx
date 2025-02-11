@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import { useContext } from "react";
 import Underliner from "../../components/ui/Underliner";
 import { CiCircleCheck } from "react-icons/ci";
 import Button from "../../components/ui/Button";
@@ -16,9 +16,9 @@ import { useNavigate } from "react-router";
 function CartPage() {
   const { cart, removeItemFromCart } = useContext(AppContext) as appContextT;
   const navigate = useNavigate();
-  const [updateOrderQty, setupdateOrderQty] = useState<
-    { [carId: string]: number }[]
-  >(() => cart.map((item) => ({ [String(item.carId)]: item.quantity })));
+  // const [updateOrderQty, setupdateOrderQty] = useState<
+  //   { [carId: string]: number }[]
+  // >(() => cart.map((item) => ({ [String(item.carId)]: item.quantity })));
   const { register } = useForm<{ coupon: string }>();
   const recentlyAddedProduct = cart.find(
     (item) => item.extras.addedAt + 10 * 1000 > new Date().getDate()

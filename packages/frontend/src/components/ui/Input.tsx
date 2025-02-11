@@ -1,10 +1,4 @@
-import React from "react";
-import {
-  FieldValues,
-  Path,
-  UseFormRegister,
-  UseFormRegisterReturn,
-} from "react-hook-form";
+import { UseFormRegisterReturn } from "react-hook-form";
 type textInputT = { __type: "text" };
 type dateInputT = { __type: "date" };
 type selectInputT = { __type: "select"; options: string[] };

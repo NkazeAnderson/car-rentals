@@ -1,10 +1,9 @@
-import React, { useContext, useRef } from "react";
+import { useContext, useRef } from "react";
 import { useForm } from "react-hook-form";
 import Input from "../../components/ui/Input";
-import { commonZodSchemas } from "common/src";
+import { backendUrl, commonZodSchemas } from "common/src";
 import Button from "../../components/ui/Button";
 import axios from "axios";
-import { backendUrl } from "../../constants";
 import { AppContext } from "../../components/contextProviders/AppContextProvider";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -24,7 +23,7 @@ function CategoryForm({ data }: { data?: commonZodSchemas.categoryT }) {
   const ref = useRef<HTMLFormElement | null>(null);
   const context = useContext(AppContext);
 
-  const submit = async (data: commonZodSchemas.categoryT) => {
+  const submit = async () => {
     try {
       if (!ref.current || !context) {
         throw new Error("");
@@ -41,7 +40,7 @@ function CategoryForm({ data }: { data?: commonZodSchemas.categoryT }) {
         throw new Error("secondaryImage");
       }
 
-      const res = await axios.post(`${backendUrl}/category`, formData);
+      await axios.post(`${backendUrl}/category`, formData);
       //@ts-ignore
       context.updateFunc("Category");
       reset();

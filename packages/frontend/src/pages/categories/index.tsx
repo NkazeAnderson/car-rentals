@@ -1,9 +1,7 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import CategoryCard from "../../components/ui/CategoryCard";
 import Container from "../../components/ui/Container";
-import ImageGallery from "../../components/ui/ImageGallery";
 import headerImage from "../../assets/vehicle-catgeory-banner.jpg";
-import { FaFacebook } from "react-icons/fa";
 import { AppContext } from "../../components/contextProviders/AppContextProvider";
 import PageHeader from "../../components/PageHeader";
 

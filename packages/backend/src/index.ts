@@ -9,9 +9,13 @@ import cookie_parser from "cookie-parser"
 import models from './models/models';
 import { userT } from 'common/src/zodSchemas';
 import { frontendUrl } from 'common';
+import { __dev, adminCode, mongoDbUrl } from './constants';
 
 const app = express();
-mongoose.connect("mongodb+srv://nkazeanderso:waletest@cluster0.unrodzu.mongodb.net/CarRentals").then(()=>{
+if (!mongoDbUrl) {
+  throw ("mongoDb connection string required")
+}
+mongoose.connect(mongoDbUrl).then(()=>{
   console.log("Successfully connected to database")
 }).catch(e=>console.error(e))
 const port = process.env.PORT || 3000;
@@ -22,7 +26,7 @@ const formDataParser = formData.parse({uploadDir:__dirname+"/../images"})
 const urlEncoded = bodyParser.urlencoded({ extended: true })
 
 app.use(cors({origin:frontendUrl, credentials:true}))
-app.use(cookie_parser('1234'))
+app.use(cookie_parser(adminCode))
 app.use(logger,jsonParser, urlEncoded)
 app.use(formDataParser);
 app.use("/images",express.static(__dirname + '/../images'))
@@ -50,16 +54,23 @@ app.get('/', (req: Request, res: Response) => {
       if (!email || !password){
         throw new Error("Email and Password Required")
       }
-      if (req.body.password === "1234") {
+      if (req.body.password === adminCode) {
         const data = await models.User.findOne({email})
         if (data?._id && data.isAdmin) {   
-          res.cookie("userId", data._id, {signed:true, 
-            // sameSite:"none", secure:true, httpOnly:true
-          })
+          res.cookie("userId", data._id, __dev ? {
+            signed:true
+          } :{
+            signed:true, sameSite:"none", secure:true, httpOnly:true
+          }
+        )
           res.json({id:data._id})
         }
         else if (data?._id && !data.isAdmin) {   
-          res.cookie("userId", data._id, {signed:false,  sameSite:"none", secure:true, httpOnly:true})
+          res.cookie("userId", data._id,  __dev ? {
+            signed:true
+          } :{
+            signed:true, sameSite:"none", secure:true, httpOnly:true
+          })
           res.json({id:data._id})
         }
         else {
@@ -81,7 +92,7 @@ app.get('/', (req: Request, res: Response) => {
       if (!email || !password || !name){
         throw new Error("Email and Password Required")
       }
-      if (password === "1234") {
+      if (password === adminCode) {
         const [firstName, ...rest] = String(name).split(" ")
         const user:userT = {
           _id:crypto.randomUUID().split("-").join("").substring(0,24),
@@ -134,6 +145,6 @@ app.use((err:Error, req:Request, res:Response, next:NextFunction) => {
 })
 
   app.listen(port, () => {
-    console.log(`Server running at http://localhost:${port}`);
+    console.log(`Server running at http://0.0.0.0:${port}`);
   });
   

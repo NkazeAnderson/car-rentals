@@ -1,5 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
-import { contactInfo } from "../constants";
+import { useContext, useEffect, useState } from "react";
 import { FaBars, FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa";
 import Logo from "./ui/Logo";
 import Container from "./ui/Container";
@@ -8,6 +7,7 @@ import { FaCircleXmark } from "react-icons/fa6";
 import { useLocation } from "react-router";
 import { AppContext, appContextT } from "./contextProviders/AppContextProvider";
 import ContactDetails from "./ContactDetails";
+import { contactInfo } from "common/src";
 
 function NavBar() {
   const [mobileMenuOpen, setmobileMenuOpen] = useState(
@@ -20,7 +20,7 @@ function NavBar() {
   };
 
   useEffect(() => {
-    window.addEventListener("resize", (e) => {
+    window.addEventListener("resize", () => {
       setmobileMenuOpen(window.screen.width > 500 ? true : false);
       console.log(window.screen.width);
     });
@@ -38,13 +38,13 @@ function NavBar() {
           <div className="flex item-center justify-between  font-light">
             <ContactDetails />
             <div className="flex space-x-5 text-amber-700 ">
-              <a href="/">
+              <a href={contactInfo.facebook}>
                 <FaFacebook style={{ fontSize: 28 }} />
               </a>
-              <a href="/">
+              <a href={contactInfo.instagram}>
                 <FaInstagram style={{ fontSize: 28 }} />
               </a>
-              <a href="/">
+              <a href={contactInfo.twitter}>
                 <FaTwitter style={{ fontSize: 28 }} />
               </a>
             </div>

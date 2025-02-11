@@ -1,10 +1,9 @@
 import { carT, orderT, reservationDataT } from "common/src/zodSchemas";
-import React, { useEffect, useState } from "react";
+
 import ImageGallery from "./ui/ImageGallery";
 import { useForm } from "react-hook-form";
 import Input from "./ui/Input";
 import Button from "./ui/Button";
-import Container from "./ui/Container";
 import { getTimeDifference } from "../utils";
 import { appContextT, cartItemT } from "./contextProviders/AppContextProvider";
 import { useNavigate } from "react-router";

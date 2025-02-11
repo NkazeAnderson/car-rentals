@@ -1,5 +1,4 @@
-import React from "react";
-import { contactInfo } from "../constants";
+import { contactInfo } from "common/src";
 
 function ContactDetails() {
   return (

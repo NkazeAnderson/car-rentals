@@ -1,4 +1,3 @@
-import React from "react";
 import headerImage from "../../assets/services-banner.jpg";
 import img1 from "../../assets/Short-Term-Rentals.jpg";
 import img2 from "../../assets/Long-Term-Rentals.jpg";
