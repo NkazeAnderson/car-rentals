@@ -13,9 +13,9 @@ export const AppEntitityForcedRuntime:Record<AppEntities,AppEntities> = {
 }
 
 export const contactInfo = {
-    email: "test@gmail.com",
-    phone:"77377373",
-    address:"asad, ny, 3663",
+    email: "info@bonvoyagecarrentals.com",
+    phone:"7512365412",
+    address:"213 West Side, Bronx, NY, 13663",
     facebook:"/",
     instagram:"/",
     twitter:"/"
