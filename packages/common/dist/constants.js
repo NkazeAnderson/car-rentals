@@ -22,5 +22,5 @@ exports.contactInfo = {
     instagram: "/",
     twitter: "/"
 };
-exports.backendUrl = "http://localhost:3000";
-exports.frontendUrl = "http://localhost:5173";
+exports.backendUrl = "https://car-rentals-backend-2r6l.onrender.com";
+exports.frontendUrl = "https://car-rentals-5v52.onrender.com";

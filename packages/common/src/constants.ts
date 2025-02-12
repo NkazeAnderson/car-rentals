@@ -21,5 +21,5 @@ export const contactInfo = {
     twitter:"/"
    }
 
-export const backendUrl = "http://localhost:3000"
-export const frontendUrl = "http://localhost:5173"
+export const backendUrl = "https://car-rentals-backend-2r6l.onrender.com"
+export const frontendUrl = "https://car-rentals-5v52.onrender.com"

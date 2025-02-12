@@ -54,8 +54,13 @@ const cors_1 = __importDefault(require("cors"));
 const routes_1 = __importDefault(require("./routes"));
 const cookie_parser_1 = __importDefault(require("cookie-parser"));
 const models_1 = __importDefault(require("./models/models"));
+const common_1 = require("common");
+const constants_1 = require("./constants");
 const app = (0, express_1.default)();
-mongoose_1.default.connect("mongodb://localhost:27017/CarRentals").then(() => {
+if (!constants_1.mongoDbUrl) {
+    throw ("mongoDb connection string required");
+}
+mongoose_1.default.connect(constants_1.mongoDbUrl).then(() => {
     console.log("Successfully connected to database");
 }).catch(e => console.error(e));
 const port = process.env.PORT || 3000;
@@ -63,8 +68,8 @@ const logger = (0, morgan_1.default)("tiny");
 const jsonParser = body_parser_1.default.json();
 const formDataParser = formData.parse({ uploadDir: __dirname + "/../images" });
 const urlEncoded = body_parser_1.default.urlencoded({ extended: true });
-app.use((0, cors_1.default)({ origin: "http://localhost:5173", credentials: true }));
-app.use((0, cookie_parser_1.default)('1234'));
+app.use((0, cors_1.default)({ origin: common_1.frontendUrl, credentials: true }));
+app.use((0, cookie_parser_1.default)(constants_1.adminCode));
 app.use(logger, jsonParser, urlEncoded);
 app.use(formDataParser);
 app.use("/images", express_1.default.static(__dirname + '/../images'));
@@ -91,16 +96,22 @@ app.post("/login", (req, res, next) => __awaiter(void 0, void 0, void 0, functio
         if (!email || !password) {
             throw new Error("Email and Password Required");
         }
-        if (req.body.password === "1234") {
+        if (req.body.password === constants_1.adminCode) {
             const data = yield models_1.default.User.findOne({ email });
             if ((data === null || data === void 0 ? void 0 : data._id) && data.isAdmin) {
-                res.cookie("userId", data._id, { signed: true,
-                    // sameSite:"none", secure:true, httpOnly:true
+                res.cookie("userId", data._id, constants_1.__dev ? {
+                    signed: true
+                } : {
+                    signed: true, sameSite: "none", secure: true, httpOnly: true
                 });
                 res.json({ id: data._id });
             }
             else if ((data === null || data === void 0 ? void 0 : data._id) && !data.isAdmin) {
-                res.cookie("userId", data._id, { signed: false, sameSite: "none", secure: true, httpOnly: true });
+                res.cookie("userId", data._id, constants_1.__dev ? {
+                    signed: true
+                } : {
+                    signed: true, sameSite: "none", secure: true, httpOnly: true
+                });
                 res.json({ id: data._id });
             }
             else {
@@ -118,14 +129,15 @@ app.post("/login", (req, res, next) => __awaiter(void 0, void 0, void 0, functio
 app.post("/createAdmin", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const email = req.body.email;
-        const password = req.body.password;
+        const password = req.body.code;
         const name = req.body.name;
         if (!email || !password || !name) {
             throw new Error("Email and Password Required");
         }
-        if (password === "1234") {
+        if (password === constants_1.adminCode) {
             const [firstName, ...rest] = String(name).split(" ");
             const user = {
+                _id: crypto.randomUUID().split("-").join("").substring(0, 24),
                 email,
                 firstName,
                 lastName: rest.join(" "),
@@ -173,5 +185,5 @@ app.use((err, req, res, next) => {
     }
 });
 app.listen(port, () => {
-    console.log(`Server running at http://localhost:${port}`);
+    console.log(`Server running at http://0.0.0.0:${port}`);
 });
